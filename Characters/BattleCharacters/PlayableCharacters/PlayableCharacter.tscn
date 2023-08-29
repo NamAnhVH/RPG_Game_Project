@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Characters/BattleCharacters/BattleCharacter.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Characters/BattleCharacters/PlayableCharacters/PlayableCharacter.gd" type="Script" id=2]
+[ext_resource path="res://Art/White-24.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 10, 3.5 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10, 10.5 )
+
+[node name="PlayableCharacter" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Sprite" parent="Body" index="0"]
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2( 0, 6.5 )
+shape = SubResource( 1 )
+
+[node name="Hitbox" parent="." index="4"]
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="1"]
+position = Vector2( 0, 0.5 )
+shape = SubResource( 2 )
