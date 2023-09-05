@@ -11,7 +11,7 @@ func _physics_process(delta):
 	move_input = move_input.normalized()
 	
 	velocity = lerp(velocity, move_input * move_speed_unit * 24, get_move_weight())
-	move_and_collide(velocity * delta)
+	move_and_slide(velocity)
 
 func _unhandled_input(event):
 	if event.is_action_pressed("attack") && attack_cooldown.is_stopped():

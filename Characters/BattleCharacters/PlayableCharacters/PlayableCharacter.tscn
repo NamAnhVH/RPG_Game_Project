@@ -8,7 +8,7 @@
 extents = Vector2( 10, 3.5 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 10, 10.5 )
+extents = Vector2( 11.5, 11.5 )
 
 [node name="PlayableCharacter" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -24,5 +24,4 @@ shape = SubResource( 1 )
 collision_mask = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="1"]
-position = Vector2( 0, 0.5 )
 shape = SubResource( 2 )

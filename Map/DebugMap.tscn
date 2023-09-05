@@ -61,8 +61,6 @@ tile_data = PoolIntArray( -393228, 0, 0, -393227, 0, 0, -393226, 0, 0, -393225, 
 
 [node name="PlayableCharacter" parent="Entities" instance=ExtResource( 3 )]
 position = Vector2( -226, -11 )
-knockback_modifier = 1.0
-move_weight = 0.2
 
 [node name="Slime" parent="Entities" instance=ExtResource( 4 )]
 position = Vector2( 197, -13 )

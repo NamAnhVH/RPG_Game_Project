@@ -1,17 +1,19 @@
 extends "res://Characters/BattleCharacters/AI.gd"
 
+signal enter_attack_state()
+
 onready var state = $StateMachine
 
 func _ready():
 	state.add_state("IDLE")
 	state.add_state("DETECTING")
 	state.add_state("ATTACKING")
+	state.add_state("PRE_ATTACK")
 	state.set_state("IDLE")
 
 func _on_ActiveArea_body_entered(intruder):
 	if intruder is PlayableCharacter && state.get_state() == "IDLE":
 		state.set_state("DETECTING")
-
 
 func _on_ActiveArea_body_exited(intruder):
 	if intruder is PlayableCharacter && state.get_state() == "DETECTING":
@@ -19,4 +21,9 @@ func _on_ActiveArea_body_exited(intruder):
 
 func _on_AttackArea_body_entered(intruder):
 	if intruder is PlayableCharacter && state.get_state() == "DETECTING":
-		pass
+		state.set_state("ATTACKING")
+		emit_signal("enter_attack_state")
+
+func _on_AttackArea_body_exited(intruder):
+	if intruder is PlayableCharacter && state.get_state() == "ATTACKING":
+		state.set_state("DETECTING")

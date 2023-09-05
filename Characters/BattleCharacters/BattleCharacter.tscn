@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Characters/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Characters/BattleCharacters/BattleCharacter.gd" type="Script" id=2]
@@ -63,10 +63,31 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
+[sub_resource type="Animation" id=4]
+resource_name = "Attack"
+
+[sub_resource type="Animation" id=5]
+resource_name = "PreAttack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.00784314, 1, 0, 1 ) ]
+}
+
 [node name="BattleCharacter" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 max_health = 8.0
 faction = 0
+knockback_modifier = 1.0
+move_weight = 0.2
 
 [node name="StateMachine" type="Node" parent="." index="0"]
 script = ExtResource( 4 )
@@ -77,14 +98,24 @@ script = ExtResource( 4 )
 wait_time = 0.2
 one_shot = true
 
+[node name="PreAttackTime" type="Timer" parent="Timers" index="1"]
+one_shot = true
+
 [node name="Hitbox" parent="." index="4" instance=ExtResource( 3 )]
 collision_layer = 0
 collision_mask = 0
 
-[node name="DamageAnimator" type="AnimationPlayer" parent="." index="5"]
+[node name="Animation" type="Node" parent="." index="5"]
+
+[node name="DamageAnimator" type="AnimationPlayer" parent="Animation" index="0"]
+root_node = NodePath("../..")
 anims/Damage = SubResource( 1 )
 anims/Invulnerability = SubResource( 2 )
 anims/RESET = SubResource( 3 )
+
+[node name="AttackAnimator" type="AnimationPlayer" parent="Animation" index="1"]
+anims/Attack = SubResource( 4 )
+anims/PreAttack = SubResource( 5 )
 
 [connection signal="damaged" from="Hitbox" to="." method="_on_Hitbox_damaged"]
 [connection signal="immunity_ended" from="Hitbox" to="." method="_on_Hitbox_immunity_ended"]

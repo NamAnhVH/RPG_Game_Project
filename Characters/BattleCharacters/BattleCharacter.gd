@@ -3,12 +3,13 @@ class_name BattleCharacter
 
 enum Factions {ALLY, ENEMY}
 
-
 const KNOCKBACK_VELOCITY = 350
 
 onready var attack_cooldown = $Timers/AttackCooldown
-onready var damage_animator = $DamageAnimator
+onready var damage_animator = $Animation/DamageAnimator
+onready var attack_animator = $Animation/AttackAnimator
 onready var hitbox = $Hitbox
+onready var pre_attack_time = $Timers/PreAttackTime
 
 export var max_health = 8.0
 export (Factions) var faction = 0

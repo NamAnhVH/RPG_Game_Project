@@ -5,3 +5,4 @@
 
 [node name="AI" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+max_active_area = 50

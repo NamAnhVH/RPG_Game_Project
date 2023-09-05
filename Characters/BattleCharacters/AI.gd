@@ -18,15 +18,28 @@ func get_ideal_target():
 	
 	return nearest_target
 
-func move_towards(to):
+func move_towards(to, move_speed_unit = 3.0):
 	var displacement = to - global_position
 	var normal = displacement.normalized()
 	velocity = lerp(velocity, normal * move_speed_unit * 24, get_move_weight())
 
-func _apply_movement():
-	velocity = move_and_slide(velocity)
+func move_around_target(target, direction):
+	var displacement = target - global_position
+	var normal = Vector2()
+	if direction == 0:
+		normal = Vector2(displacement.y, -displacement.x).normalized()
+	else:
+		normal = Vector2(-displacement.y, displacement.x).normalized()
+	velocity = lerp(velocity, normal * move_speed_unit * 24, get_move_weight())
+
+
+func _apply_movement(delta):
+	 move_and_slide(velocity)
 
 func generate_random_target():
 	var angle = rand_range(0, 2 * PI)
 	var offset = Vector2(cos(angle), sin(angle)) * max_active_area
 	random_target = first_position + offset
+
+func stop_moving():
+	velocity = Vector2(0, 0)
