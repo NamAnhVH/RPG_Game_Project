@@ -2,8 +2,14 @@ extends BattleCharacter
 
 export var max_active_area = 50
 
+onready var change_direction_cooldown = $Timers/ChangeDirectionCooldown
+onready var idle_time = $Timers/IdleTime
+
 onready var first_position = global_position
 onready var random_target = first_position
+
+var direction = 0
+var idle = 1
 
 func get_ideal_target():
 	var potential_targets = []
@@ -43,3 +49,17 @@ func generate_random_target():
 
 func stop_moving():
 	velocity = Vector2(0, 0)
+
+func _on_ChangeDirectionCooldown_timeout():
+	if direction == 0:
+		direction = 1
+	else:
+		direction = 0
+
+func _on_IdleTime_timeout():
+	if idle == 0:
+		idle = 1
+	else: 
+		idle_animator.play("RESET")
+		idle = 0
+

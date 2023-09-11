@@ -7,14 +7,18 @@
 script = ExtResource( 2 )
 faction = 1
 
+[node name="Body" parent="." index="1"]
+modulate = Color( 0.101961, 0.133333, 0.847059, 1 )
+
+[node name="IdleTime" parent="Timers" index="2"]
+wait_time = 3.0
+autostart = true
+
 [node name="ActiveArea" type="Area2D" parent="." index="4"]
 collision_layer = 0
 
 [node name="AttackArea" type="Area2D" parent="." index="5"]
 collision_mask = 0
-
-[node name="AttackAnimator" parent="Animation" index="1"]
-root_node = NodePath("../..")
 
 [connection signal="body_entered" from="ActiveArea" to="." method="_on_ActiveArea_body_entered"]
 [connection signal="body_exited" from="ActiveArea" to="." method="_on_ActiveArea_body_exited"]

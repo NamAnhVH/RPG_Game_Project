@@ -1,6 +1,6 @@
 extends "res://Characters/BattleCharacters/AI.gd"
 
-signal enter_attack_state()
+signal enter_idle_state()
 
 onready var state = $StateMachine
 
@@ -18,11 +18,11 @@ func _on_ActiveArea_body_entered(intruder):
 func _on_ActiveArea_body_exited(intruder):
 	if intruder is PlayableCharacter && state.get_state() == "DETECTING":
 		state.set_state("IDLE")
+		emit_signal("enter_idle_state")
 
 func _on_AttackArea_body_entered(intruder):
 	if intruder is PlayableCharacter && state.get_state() == "DETECTING":
 		state.set_state("ATTACKING")
-		emit_signal("enter_attack_state")
 
 func _on_AttackArea_body_exited(intruder):
 	if intruder is PlayableCharacter && state.get_state() == "ATTACKING":

@@ -10,8 +10,14 @@ func _physics_process(delta):
 	move_input.y = -Input.get_action_strength("move_up") + Input.get_action_strength("move_down")
 	move_input = move_input.normalized()
 	
+	if move_input != Vector2.ZERO:
+		animation_tree.set("parameters/Idle/blend_position", move_input)
+		animation_tree.set("parameters/Run/blend_position", move_input)
+		animation_state.travel("Run")
+	else:
+		animation_state.travel("Idle")
 	velocity = lerp(velocity, move_input * move_speed_unit * 24, get_move_weight())
-	move_and_slide(velocity)
+	velocity = move_and_slide(velocity)
 
 func _unhandled_input(event):
 	if event.is_action_pressed("attack") && attack_cooldown.is_stopped():

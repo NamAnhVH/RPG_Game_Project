@@ -1,7 +1,6 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Characters/BattleCharacters/Enemies/Enemy.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Art/Round-Red-24.png" type="Texture" id=2]
 [ext_resource path="res://Core/DamageArea.gd" type="Script" id=3]
 [ext_resource path="res://Characters/BattleCharacters/Enemies/SlimeFSM.gd" type="Script" id=4]
 [ext_resource path="res://Characters/BattleCharacters/Enemies/Slime.gd" type="Script" id=5]
@@ -18,29 +17,17 @@ radius = 59.0762
 
 [sub_resource type="CircleShape2D" id=7]
 
-[sub_resource type="Animation" id=8]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("Body:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
-}
-
 [node name="Slime" instance=ExtResource( 1 )]
 script = ExtResource( 5 )
 
 [node name="StateMachine" parent="." index="0"]
 script = ExtResource( 4 )
 
+[node name="Body" parent="." index="1"]
+modulate = Color( 0.101961, 0.133333, 0.847059, 1 )
+
 [node name="Sprite" parent="Body" index="0"]
-texture = ExtResource( 2 )
+hframes = 9
 
 [node name="CollisionShape2D" parent="." index="2"]
 visible = false
@@ -49,7 +36,7 @@ shape = SubResource( 1 )
 [node name="AttackCooldown" parent="Timers" index="0"]
 wait_time = 1.5
 
-[node name="ChangeDirectionCooldown" type="Timer" parent="Timers" index="2"]
+[node name="ChangeDirectionCooldown" parent="Timers" index="1"]
 wait_time = 3.0
 autostart = true
 
@@ -81,9 +68,7 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="1"]
 shape = SubResource( 7 )
 
-[node name="AttackAnimator" parent="Animation" index="1"]
-anims/RESET = SubResource( 8 )
+[node name="WallDetector" parent="." index="9"]
+enabled = true
 
-[connection signal="enter_attack_state" from="." to="." method="_on_Slime_enter_attack_state"]
-[connection signal="timeout" from="Timers/ChangeDirectionCooldown" to="." method="_on_ChangeDirectionCooldown_timeout"]
-[connection signal="animation_finished" from="Animation/AttackAnimator" to="." method="_on_AttackAnimator_animation_finished"]
+[connection signal="enter_idle_state" from="." to="." method="_on_Slime_enter_idle_state"]
