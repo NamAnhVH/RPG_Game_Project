@@ -27,10 +27,15 @@ one_shot = true
 collision_layer = 0
 collision_mask = 0
 
-[node name="AnimationTree" parent="Animation" index="1"]
-parameters/playback = SubResource( 1 )
+[node name="WallDetector" type="RayCast2D" parent="." index="5"]
 
-[node name="WallDetector" type="RayCast2D" parent="." index="6"]
+[node name="IdleAnimationTree" parent="Animation" index="1"]
+parameters/playback = SubResource( 1 )
+parameters/Idle/blend_position = Vector2( 0, 0 )
+parameters/Run/blend_position = Vector2( 0, 0 )
+
+[node name="DamageAnimation" parent="Animation" index="2"]
+root_node = NodePath("../..")
 
 [connection signal="damaged" from="Hitbox" to="." method="_on_Hitbox_damaged"]
 [connection signal="immunity_ended" from="Hitbox" to="." method="_on_Hitbox_immunity_ended"]

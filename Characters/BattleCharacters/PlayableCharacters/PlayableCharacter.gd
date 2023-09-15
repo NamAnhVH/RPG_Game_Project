@@ -2,7 +2,6 @@ extends BattleCharacter
 class_name PlayableCharacter
 
 const HAND_RADIUS = 24
-
 var move_input := Vector2()
 
 func _physics_process(delta):
@@ -11,11 +10,11 @@ func _physics_process(delta):
 	move_input = move_input.normalized()
 	
 	if move_input != Vector2.ZERO:
-		animation_tree.set("parameters/Idle/blend_position", move_input)
-		animation_tree.set("parameters/Run/blend_position", move_input)
-		animation_state.travel("Run")
+		idle_animation_tree.set("parameters/Idle/blend_position", move_input)
+		idle_animation_tree.set("parameters/Run/blend_position", move_input)
+		idle_animation_state.travel("Run")
 	else:
-		animation_state.travel("Idle")
+		idle_animation_state.travel("Idle")
 	velocity = lerp(velocity, move_input * move_speed_unit * 24, get_move_weight())
 	velocity = move_and_slide(velocity)
 

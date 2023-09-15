@@ -7,6 +7,7 @@ const KNOCKBACK_VELOCITY = 350
 
 onready var attack_cooldown = $Timers/AttackCooldown
 onready var wall_detector = $WallDetector
+onready var damage_animation = $DamageAnimation
 onready var hitbox = $Hitbox
 
 
@@ -35,12 +36,12 @@ func _on_Hitbox_damaged(amount, knockback_strength, damage_source, attacker):
 	set_health(health - amount)
 	if damage_source != null:
 		knockback(knockback_strength, damage_source.global_position)
-	animation_player.play("Damage")
+	damage_animation.play("Damage")
 	if hitbox.immunity_duration != 0:
-		animation_player.queue("Invulnerability")
+		damage_animation.queue("Invulnerability")
 
 func _on_Hitbox_immunity_ended():
-	animation_player.play("RESET")
+	damage_animation.play("RESET")
 
 func set_target(value):
 	if value is WeakRef:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Characters/BattleCharacters/Enemies/Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Art/Green-Slime.png" type="Texture" id=2]
@@ -20,8 +20,6 @@ height = 4.0
 radius = 5.0
 height = 4.0
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=8]
-
 [node name="Slime" instance=ExtResource( 1 )]
 script = ExtResource( 5 )
 
@@ -33,6 +31,7 @@ position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 hframes = 5
 vframes = 13
+frame = 18
 
 [node name="CollisionShape2D" parent="." index="2"]
 visible = false
@@ -70,6 +69,7 @@ scale = Vector2( 5, 5 )
 shape = SubResource( 6 )
 
 [node name="Hitbox" parent="." index="7"]
+visible = false
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="1"]
@@ -77,8 +77,5 @@ position = Vector2( 0, -4 )
 rotation = 1.5708
 shape = SubResource( 10 )
 
-[node name="AnimationTree" parent="Animation" index="1"]
-parameters/playback = SubResource( 8 )
-
-[node name="WallDetector" parent="." index="9"]
+[node name="WallDetector" parent="." index="8"]
 enabled = true

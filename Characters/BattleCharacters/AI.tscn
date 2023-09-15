@@ -11,5 +11,9 @@ max_active_area = 50
 
 [node name="IdleTime" type="Timer" parent="Timers" index="2"]
 
+[node name="IdleAnimationTree" parent="Animation" index="1"]
+tree_root = null
+anim_player = NodePath("")
+
 [connection signal="timeout" from="Timers/ChangeDirectionCooldown" to="." method="_on_ChangeDirectionCooldown_timeout"]
 [connection signal="timeout" from="Timers/IdleTime" to="." method="_on_IdleTime_timeout"]

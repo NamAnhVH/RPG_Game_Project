@@ -60,6 +60,6 @@ func _on_IdleTime_timeout():
 	if idle == 0:
 		idle = 1
 	else: 
-		idle_animator.play("RESET")
+#		idle_animatr.play("RESET")
 		idle = 0
 
