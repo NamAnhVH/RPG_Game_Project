@@ -1,21 +1,26 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Characters/BattleCharacters/Enemies/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Art/Green-Slime.png" type="Texture" id=2]
 [ext_resource path="res://Core/DamageArea.gd" type="Script" id=3]
 [ext_resource path="res://Characters/BattleCharacters/Enemies/SlimeFSM.gd" type="Script" id=4]
 [ext_resource path="res://Characters/BattleCharacters/Enemies/Slime.gd" type="Script" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 
-[sub_resource type="CircleShape2D" id=3]
-radius = 12.0
+[sub_resource type="CapsuleShape2D" id=9]
+radius = 5.0
+height = 4.0
 
 [sub_resource type="RectangleShape2D" id=5]
 
 [sub_resource type="CircleShape2D" id=6]
-radius = 59.0762
 
-[sub_resource type="CircleShape2D" id=7]
+[sub_resource type="CapsuleShape2D" id=10]
+radius = 5.0
+height = 4.0
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=8]
 
 [node name="Slime" instance=ExtResource( 1 )]
 script = ExtResource( 5 )
@@ -23,11 +28,11 @@ script = ExtResource( 5 )
 [node name="StateMachine" parent="." index="0"]
 script = ExtResource( 4 )
 
-[node name="Body" parent="." index="1"]
-modulate = Color( 0.101961, 0.133333, 0.847059, 1 )
-
 [node name="Sprite" parent="Body" index="0"]
-hframes = 9
+position = Vector2( 0, -9 )
+texture = ExtResource( 2 )
+hframes = 5
+vframes = 13
 
 [node name="CollisionShape2D" parent="." index="2"]
 visible = false
@@ -46,7 +51,9 @@ collision_mask = 0
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" index="0"]
-shape = SubResource( 3 )
+position = Vector2( 0, -4 )
+rotation = 1.5708
+shape = SubResource( 9 )
 
 [node name="ActiveArea" parent="." index="5"]
 visible = false
@@ -59,16 +66,19 @@ shape = SubResource( 5 )
 visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" index="0"]
+scale = Vector2( 5, 5 )
 shape = SubResource( 6 )
 
 [node name="Hitbox" parent="." index="7"]
-visible = false
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="1"]
-shape = SubResource( 7 )
+position = Vector2( 0, -4 )
+rotation = 1.5708
+shape = SubResource( 10 )
+
+[node name="AnimationTree" parent="Animation" index="1"]
+parameters/playback = SubResource( 8 )
 
 [node name="WallDetector" parent="." index="9"]
 enabled = true
-
-[connection signal="enter_idle_state" from="." to="." method="_on_Slime_enter_idle_state"]

@@ -8,6 +8,6 @@ onready var animation_state = animation_tree.get("parameters/playback")
 func _ready():
 	animation_tree.active = true
 
-export var move_speed_unit := 8.0
+export var move_speed_unit := 5.0
 
 var velocity := Vector2()

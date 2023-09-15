@@ -5,7 +5,7 @@
 [ext_resource path="res://Art/Character.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 6, 3.5 )
+extents = Vector2( 6, 5.75 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 4, 11.75 )
@@ -38,7 +38,7 @@ vframes = 16
 frame = 24
 
 [node name="CollisionShape2D" parent="." index="2"]
-visible = false
+position = Vector2( 0, 0.75 )
 shape = SubResource( 1 )
 
 [node name="Hitbox" parent="." index="4"]

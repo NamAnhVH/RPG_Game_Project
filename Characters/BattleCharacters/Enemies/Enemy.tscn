@@ -1,14 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Characters/BattleCharacters/AI.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Characters/BattleCharacters/Enemies/Enemy.gd" type="Script" id=2]
 
+[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
+
 [node name="Enemy" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 faction = 1
-
-[node name="Body" parent="." index="1"]
-modulate = Color( 0.101961, 0.133333, 0.847059, 1 )
 
 [node name="IdleTime" parent="Timers" index="2"]
 wait_time = 3.0
@@ -19,6 +18,9 @@ collision_layer = 0
 
 [node name="AttackArea" type="Area2D" parent="." index="5"]
 collision_mask = 0
+
+[node name="AnimationTree" parent="Animation" index="1"]
+parameters/playback = SubResource( 1 )
 
 [connection signal="body_entered" from="ActiveArea" to="." method="_on_ActiveArea_body_entered"]
 [connection signal="body_exited" from="ActiveArea" to="." method="_on_ActiveArea_body_exited"]
