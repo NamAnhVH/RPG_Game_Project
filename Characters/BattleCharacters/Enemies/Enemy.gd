@@ -2,8 +2,6 @@ extends "res://Characters/BattleCharacters/AI.gd"
 
 signal enter_idle_state()
 
-onready var state = $StateMachine
-
 func _ready():
 	state.add_state("IDLE")
 	state.add_state("DETECTING")

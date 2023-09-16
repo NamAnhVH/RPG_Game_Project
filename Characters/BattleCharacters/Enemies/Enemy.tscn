@@ -17,10 +17,6 @@ collision_layer = 0
 [node name="AttackArea" type="Area2D" parent="." index="5"]
 collision_mask = 0
 
-[node name="IdleAnimationTree" parent="Animation" index="1"]
-tree_root = null
-anim_player = NodePath("")
-
 [connection signal="body_entered" from="ActiveArea" to="." method="_on_ActiveArea_body_entered"]
 [connection signal="body_exited" from="ActiveArea" to="." method="_on_ActiveArea_body_exited"]
 [connection signal="body_entered" from="AttackArea" to="." method="_on_AttackArea_body_entered"]

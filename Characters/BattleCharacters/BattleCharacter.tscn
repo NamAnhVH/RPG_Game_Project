@@ -29,10 +29,8 @@ collision_mask = 0
 
 [node name="WallDetector" type="RayCast2D" parent="." index="5"]
 
-[node name="IdleAnimationTree" parent="Animation" index="1"]
+[node name="AnimationTree" parent="Animation" index="1"]
 parameters/playback = SubResource( 1 )
-parameters/Idle/blend_position = Vector2( 0, 0 )
-parameters/Run/blend_position = Vector2( 0, 0 )
 
 [node name="DamageAnimation" parent="Animation" index="2"]
 root_node = NodePath("../..")

@@ -7,9 +7,8 @@ const KNOCKBACK_VELOCITY = 350
 
 onready var attack_cooldown = $Timers/AttackCooldown
 onready var wall_detector = $WallDetector
-onready var damage_animation = $DamageAnimation
 onready var hitbox = $Hitbox
-
+onready var state = $StateMachine
 
 export var max_health = 8.0
 export (Factions) var faction = 0
