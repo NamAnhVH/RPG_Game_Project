@@ -25,11 +25,11 @@ func move_state():
 	move_input = move_input.normalized()
 	
 	mouse = (get_global_mouse_position() - global_position).normalized()
-	animation_tree.set("parameters/Idle/blend_position", mouse)
-	animation_tree.set("parameters/Run/blend_position", mouse)
 	animation_tree.set("parameters/Attack/blend_position", mouse)
-	
+
 	if move_input != Vector2.ZERO:
+		animation_tree.set("parameters/Idle/blend_position", move_input)
+		animation_tree.set("parameters/Run/blend_position", move_input)
 		animation_state.travel("Run")
 	else:
 		animation_state.travel("Idle")
@@ -48,6 +48,7 @@ func attack_state():
 	attack_area.set_attacker(self)
 	animation_state.travel("Attack")
 	attack_cooldown.start()
+	animation_tree.set("parameters/Idle/blend_position", mouse)
 
 func attack_animation_finished():
 	state.set_state("MOVE")

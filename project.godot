@@ -25,6 +25,16 @@ _global_script_classes=[ {
 "path": "res://Core/DamageArea.gd"
 }, {
 "base": "BattleCharacter",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://Characters/BattleCharacters/Enemies/Enemy.gd"
+}, {
+"base": "StaticBody2D",
+"class": "Feature",
+"language": "GDScript",
+"path": "res://Features/Feature.gd"
+}, {
+"base": "BattleCharacter",
 "class": "PlayableCharacter",
 "language": "GDScript",
 "path": "res://Characters/BattleCharacters/PlayableCharacters/PlayableCharacter.gd"
@@ -38,6 +48,8 @@ _global_script_class_icons={
 "BattleCharacter": "",
 "Character": "",
 "DamageArea": "",
+"Enemy": "",
+"Feature": "",
 "PlayableCharacter": "",
 "StateMachine": ""
 }
@@ -101,6 +113,7 @@ attack={
 
 2d_physics/layer_1="player_hazard"
 2d_physics/layer_2="enemy_hazard"
+2d_physics/layer_3="entity_hazard"
 
 [physics]
 

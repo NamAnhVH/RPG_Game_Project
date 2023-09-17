@@ -1,4 +1,4 @@
-extends "res://Characters/BattleCharacters/Enemies/Enemy.gd"
+extends Enemy
 
 var target = null
 

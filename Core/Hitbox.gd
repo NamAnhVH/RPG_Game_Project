@@ -3,6 +3,7 @@ extends Area2D
 signal damaged(amount, knockback_strength, damage_source, attacker)
 signal immunity_started()
 signal immunity_ended()
+signal feature_damaged()
 
 onready var immunity_timmer = $ImmunityTimer
 onready var parent = get_parent()
@@ -26,8 +27,11 @@ func _on_Hitbox_area_entered(area):
 	
 	if area is DamageArea:
 		if !(self in area.exceptions):
-			damage(area.damage_amount, area.knockback_strength, area, area.attacker)
-			area.on_hit(self)
+			if parent == Enemy:
+				damage(area.damage_amount, area.knockback_strength, area, area.attacker)
+				area.on_hit(self)
+			else:
+				emit_signal("feature_damaged")
 
 func damage(amount, knockback_strength, damage_source, attacker):
 	emit_signal("damaged", amount, knockback_strength, damage_source, attacker)

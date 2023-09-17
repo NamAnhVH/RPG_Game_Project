@@ -1,4 +1,5 @@
 extends "res://Characters/BattleCharacters/AI.gd"
+class_name Enemy
 
 signal enter_idle_state()
 
