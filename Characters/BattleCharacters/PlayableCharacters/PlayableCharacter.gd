@@ -39,16 +39,19 @@ func move_state():
 func _unhandled_input(event):
 	if event.is_action_pressed("attack") && attack_cooldown.is_stopped():
 		state.set_state("ATTACK")
+		attack()
 
 func attack_state():
 	velocity = Vector2.ZERO
+	animation_tree.set("parameters/Idle/blend_position", mouse)
+	animation_state.travel("Attack")
+	attack_cooldown.start()
+
+func attack():
 	var attack_area = preload("res://Attack/PlayerAttackArea.tscn").instance()
 	add_child(attack_area)
 	attack_area.position = mouse * HAND_RADIUS
 	attack_area.set_attacker(self)
-	animation_state.travel("Attack")
-	attack_cooldown.start()
-	animation_tree.set("parameters/Idle/blend_position", mouse)
 
 func attack_animation_finished():
 	state.set_state("MOVE")

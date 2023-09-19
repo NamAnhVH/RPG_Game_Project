@@ -9,7 +9,10 @@ onready var first_position = global_position
 onready var random_target = first_position
 
 var direction = 0
-var idle = 1
+var idle = 0
+
+func _ready():
+	idle_time.start()
 
 func get_ideal_target():
 	var potential_targets = []
@@ -24,7 +27,7 @@ func get_ideal_target():
 	
 	return nearest_target
 
-func move_towards(to, move_speed_unit = 3.0):
+func move_towards(to, move_speed_unit):
 	var displacement = to - global_position
 	var normal = displacement.normalized()
 	velocity = lerp(velocity, normal * move_speed_unit * 24, get_move_weight())
@@ -40,7 +43,7 @@ func move_around_target(target, direction):
 
 
 func _apply_movement(delta):
-	 move_and_slide(velocity)
+	  move_and_slide(velocity)
 
 func generate_random_target():
 	var angle = rand_range(0, 2 * PI)
@@ -48,7 +51,7 @@ func generate_random_target():
 	random_target = first_position + offset
 
 func stop_moving():
-	velocity = Vector2(0, 0)
+	velocity = Vector2.ZERO
 
 func _on_ChangeDirectionCooldown_timeout():
 	if direction == 0:
@@ -59,7 +62,10 @@ func _on_ChangeDirectionCooldown_timeout():
 func _on_IdleTime_timeout():
 	if idle == 0:
 		idle = 1
+		idle_time.set_wait_time(2)
+		idle_time.start()
 	else: 
-#		idle_animatr.play("RESET")
 		idle = 0
+		idle_time.set_wait_time(5)
+		idle_time.start()
 

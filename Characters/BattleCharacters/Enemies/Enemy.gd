@@ -4,10 +4,15 @@ class_name Enemy
 signal enter_idle_state()
 
 func _ready():
+	set_state()
+
+func set_state():
 	state.add_state("IDLE")
 	state.add_state("DETECTING")
 	state.add_state("ATTACKING")
 	state.add_state("PRE_ATTACK")
+	state.add_state("ATTACK")
+	state.add_state("DIE")
 	state.set_state("IDLE")
 
 func _on_ActiveArea_body_entered(intruder):

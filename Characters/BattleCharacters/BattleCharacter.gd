@@ -3,10 +3,11 @@ class_name BattleCharacter
 
 enum Factions {ALLY, ENEMY}
 
-const KNOCKBACK_VELOCITY = 350
+signal died()
+
+const KNOCKBACK_VELOCITY = 200
 
 onready var attack_cooldown = $Timers/AttackCooldown
-onready var wall_detector = $WallDetector
 onready var hitbox = $Hitbox
 onready var state = $StateMachine
 
@@ -25,7 +26,7 @@ func set_health(value):
 		die()
 
 func die():
-	queue_free()
+	emit_signal("died")
 
 func _ready():
 	yield() #Them khoang thoi gian de khoi tao Globals

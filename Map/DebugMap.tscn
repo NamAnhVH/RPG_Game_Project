@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Art/spring_outdoorsTileSheet_lightergrass.hu-HU.png" type="Texture" id=1]
 [ext_resource path="res://Art/Spring-Dirt-Path.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Art/Dirt-Wall.png" type="Texture" id=4]
 [ext_resource path="res://Map/DebugMap.gd" type="Script" id=5]
 [ext_resource path="res://Features/Grass.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Characters/BattleCharacters/Enemies/Slime.tscn" type="PackedScene" id=7]
 
 [sub_resource type="TileSet" id=2]
 0/name = "spring_outdoorsTileSheet_lightergrass.hu-HU.png 0"
@@ -576,6 +577,9 @@ position = Vector2( 40, 108 )
 
 [node name="PlayableCharacter" parent="Entities" instance=ExtResource( 3 )]
 position = Vector2( -148, -33 )
+
+[node name="Slime" parent="Entities" instance=ExtResource( 7 )]
+position = Vector2( 136, 52 )
 
 [node name="Border" type="TileMap" parent="."]
 tile_set = SubResource( 1 )

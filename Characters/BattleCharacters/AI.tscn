@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Characters/BattleCharacters/BattleCharacter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Characters/BattleCharacters/AI.gd" type="Script" id=2]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
 
 [node name="AI" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -10,10 +12,12 @@ max_active_area = 50
 [node name="ChangeDirectionCooldown" type="Timer" parent="Timers" index="1"]
 
 [node name="IdleTime" type="Timer" parent="Timers" index="2"]
+one_shot = true
 
-[node name="IdleAnimationTree" parent="Animation" index="1"]
-tree_root = null
-anim_player = NodePath("")
+[node name="WallDectector" type="RayCast2D" parent="." index="5"]
+
+[node name="AnimationTree" parent="Animation" index="1"]
+parameters/playback = SubResource( 1 )
 
 [connection signal="timeout" from="Timers/ChangeDirectionCooldown" to="." method="_on_ChangeDirectionCooldown_timeout"]
 [connection signal="timeout" from="Timers/IdleTime" to="." method="_on_IdleTime_timeout"]

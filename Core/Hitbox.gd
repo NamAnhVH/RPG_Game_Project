@@ -27,7 +27,7 @@ func _on_Hitbox_area_entered(area):
 	
 	if area is DamageArea:
 		if !(self in area.exceptions):
-			if parent == Enemy:
+			if parent is BattleCharacter:
 				damage(area.damage_amount, area.knockback_strength, area, area.attacker)
 				area.on_hit(self)
 			else:
