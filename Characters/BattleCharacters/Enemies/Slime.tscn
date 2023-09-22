@@ -559,7 +559,6 @@ anims/RESET = SubResource( 44 )
 
 [node name="AnimationTree" parent="Animation" index="1"]
 tree_root = SubResource( 43 )
-active = true
 parameters/playback = SubResource( 11 )
 parameters/Die/blend_position = 0
 parameters/Idle/blend_position = Vector2( 0.16441, 0.0663793 )

@@ -1,7 +1,7 @@
 extends BattleCharacter
 class_name PlayableCharacter
 
-const HAND_RADIUS = 24
+const HAND_RADIUS = 20
 var move_input := Vector2()
 var mouse := Vector2()
 
@@ -49,7 +49,9 @@ func attack_state():
 
 func attack():
 	var attack_area = preload("res://Attack/PlayerAttackArea.tscn").instance()
-	add_child(attack_area)
+	body.add_child(attack_area)
+	var rotation = atan2(mouse.y, mouse.x)
+	attack_area.rotation = rotation
 	attack_area.position = mouse * HAND_RADIUS
 	attack_area.set_attacker(self)
 
