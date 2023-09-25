@@ -62,7 +62,8 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Globals="*res://Autoload/Globals.tscn"
+Globals="*res://Autoload/Globals.gd"
+Constants="*res://Autoload/Constants.gd"
 
 [display]
 

@@ -22,4 +22,5 @@ visible = false
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="1"]
+visible = false
 shape = SubResource( 2 )

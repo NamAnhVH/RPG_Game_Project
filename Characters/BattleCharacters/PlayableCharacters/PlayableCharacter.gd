@@ -2,8 +2,11 @@ extends BattleCharacter
 class_name PlayableCharacter
 
 const HAND_RADIUS = 20
+const BIAS = Vector2(0, 5)
+
 var move_input := Vector2()
 var mouse := Vector2()
+
 
 func _ready():
 	set_state()
@@ -24,7 +27,7 @@ func move_state():
 	move_input.y = -Input.get_action_strength("move_up") + Input.get_action_strength("move_down")
 	move_input = move_input.normalized()
 	
-	mouse = (get_global_mouse_position() - global_position).normalized()
+	mouse = (get_global_mouse_position() - global_position - BIAS).normalized()
 	animation_tree.set("parameters/Attack/blend_position", mouse)
 
 	if move_input != Vector2.ZERO:
@@ -48,12 +51,13 @@ func attack_state():
 	attack_cooldown.start()
 
 func attack():
-	var attack_area = preload("res://Attack/PlayerAttackArea.tscn").instance()
+	var attack_area = preload("res://Attack/Weapon/StoneSword.tscn").instance()
 	body.add_child(attack_area)
 	var rotation = atan2(mouse.y, mouse.x)
 	attack_area.rotation = rotation
-	attack_area.position = mouse * HAND_RADIUS
+	attack_area.position = mouse * HAND_RADIUS - BIAS
 	attack_area.set_attacker(self)
+
 
 func attack_animation_finished():
 	state.set_state("MOVE")

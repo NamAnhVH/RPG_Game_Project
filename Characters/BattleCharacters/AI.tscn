@@ -14,8 +14,6 @@ max_active_area = 50
 [node name="IdleTime" type="Timer" parent="Timers" index="2"]
 one_shot = true
 
-[node name="WallDectector" type="RayCast2D" parent="." index="5"]
-
 [node name="AnimationTree" parent="Animation" index="1"]
 parameters/playback = SubResource( 1 )
 

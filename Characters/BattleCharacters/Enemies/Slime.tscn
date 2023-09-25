@@ -35,6 +35,7 @@ height = 6.0
 [sub_resource type="CircleShape2D" id=65]
 
 [sub_resource type="CircleShape2D" id=6]
+radius = 7.01142
 
 [sub_resource type="CapsuleShape2D" id=10]
 radius = 5.0
@@ -228,7 +229,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=61]
 resource_name = "PreAttackDown"
-length = 0.5
+length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body/Sprite:frame")
 tracks/0/interp = 1
@@ -236,7 +237,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15, 0.3 ),
+"times": PoolRealArray( 0, 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ 40, 41, 42 ]
@@ -248,7 +249,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.5 ),
+"times": PoolRealArray( 0.3 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -258,7 +259,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=64]
 resource_name = "PreAttackLeft"
-length = 0.5
+length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body/Sprite:frame")
 tracks/0/interp = 1
@@ -266,7 +267,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15, 0.3 ),
+"times": PoolRealArray( 0, 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ 55, 56, 57 ]
@@ -278,7 +279,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.5 ),
+"times": PoolRealArray( 0.3 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -288,7 +289,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=62]
 resource_name = "PreAttackRight"
-length = 0.5
+length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body/Sprite:frame")
 tracks/0/interp = 1
@@ -296,7 +297,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15, 0.3 ),
+"times": PoolRealArray( 0, 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ 45, 46, 47 ]
@@ -308,7 +309,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.5 ),
+"times": PoolRealArray( 0.3 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -318,7 +319,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=63]
 resource_name = "PreAttackUp"
-length = 0.5
+length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body/Sprite:frame")
 tracks/0/interp = 1
@@ -326,7 +327,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15, 0.3 ),
+"times": PoolRealArray( 0, 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ 50, 51, 52 ]
@@ -338,7 +339,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.5 ),
+"times": PoolRealArray( 0.3 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -502,7 +503,7 @@ rotation = 1.5708
 shape = SubResource( 60 )
 
 [node name="AttackCooldown" parent="Timers" index="0"]
-wait_time = 1.5
+wait_time = 2.0
 
 [node name="ChangeDirectionCooldown" parent="Timers" index="1"]
 wait_time = 3.0
@@ -565,5 +566,9 @@ parameters/Idle/blend_position = Vector2( 0.16441, 0.0663793 )
 parameters/Move/blend_position = Vector2( -0.131528, 0.082659 )
 parameters/Preattack/blend_position = Vector2( 0, 0 )
 
+[node name="Line2D" type="Line2D" parent="." index="9"]
+width = 2.0
+
 [connection signal="died" from="." to="." method="_on_Slime_died"]
 [connection signal="enter_idle_state" from="." to="." method="_on_Slime_enter_idle_state"]
+[connection signal="ready_enter_detect_state" from="." to="." method="_on_Slime_ready_enter_detect_state"]
