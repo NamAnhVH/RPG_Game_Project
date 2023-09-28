@@ -406,13 +406,14 @@ graph_offset = Vector2( -183.686, -2 )
 
 [node name="PlayableCharacter" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+max_health = 10.0
 
 [node name="StateMachine" parent="." index="0"]
 script = SubResource( 24 )
 
 [node name="Sprite" parent="Body" index="0"]
-position = Vector2( 0, -10 )
 texture = ExtResource( 3 )
+offset = Vector2( 0, -10 )
 hframes = 6
 vframes = 16
 
@@ -423,6 +424,7 @@ shape = SubResource( 1 )
 
 [node name="Hitbox" parent="." index="4"]
 collision_mask = 1
+immunity_duration = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="1"]
 position = Vector2( 0, -1.25 )
@@ -449,3 +451,5 @@ parameters/playback = SubResource( 44 )
 parameters/Attack/blend_position = Vector2( 0, 0 )
 parameters/Idle/blend_position = Vector2( -0.476142, -0.0568966 )
 parameters/Run/blend_position = Vector2( 0.0233502, -0.189655 )
+
+[connection signal="died" from="." to="." method="_on_PlayableCharacter_died"]

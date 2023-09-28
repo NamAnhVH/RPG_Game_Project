@@ -6,6 +6,7 @@
 script = ExtResource( 1 )
 
 [node name="ImmunityTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="area_entered" from="." to="." method="_on_Hitbox_area_entered"]
 [connection signal="timeout" from="ImmunityTimer" to="." method="_on_ImmunityTimer_timeout"]

@@ -2,6 +2,8 @@ extends BattleCharacter
 
 export var max_active_area = 50
 
+signal enter_idle_state()
+
 onready var change_direction_cooldown = $Timers/ChangeDirectionCooldown
 onready var idle_time = $Timers/IdleTime
 onready var line_2d = $Line2D
@@ -26,8 +28,11 @@ func get_ideal_target():
 			if this_distance < distance:
 				nearest_target = character
 				distance = this_distance
-	
-	return nearest_target
+				distance = this_distance
+	if nearest_target != null:
+		return nearest_target
+	else:
+		emit_signal("enter_idle_state")
 
 func move_towards(to, move_speed_unit):
 	var displacement = to - global_position
@@ -50,6 +55,9 @@ func move_along_path():
 		if global_position == path[0]:
 			path.remove(0)
 
+func stop_moving():
+	velocity = Vector2.ZERO
+
 func _apply_movement(delta):
 	  move_and_slide(velocity)
 
@@ -57,9 +65,6 @@ func generate_random_target():
 	var angle = rand_range(0, 2 * PI)
 	var offset = Vector2(cos(angle), sin(angle)) * max_active_area
 	set_random_position(first_position + offset)
-
-func stop_moving():
-	velocity = Vector2.ZERO
 
 func _on_ChangeDirectionCooldown_timeout():
 	if direction == 0:
@@ -77,6 +82,20 @@ func _on_IdleTime_timeout():
 		idle_time.set_wait_time(5)
 		idle_time.start()
 
+func _on_PlayerDetectionZone_enter_chase_state():
+	state.set_state(States.CHASE)
+
+func _on_PlayerDetectionZone_enter_idle_state():
+	state.set_state(States.IDLE)
+
+func _on_AttackableZone_enter_attacking_state():
+	state.set_state(States.ATTACKING)
+
+func _on_AttackableZone_enter_chase_state():
+	state.set_state(States.CHASE)
+
+func _on_AttackableZone_ready_enter_chase_state():
+	return
 
 func set_random_position(position):
 	random_position = position
@@ -86,8 +105,9 @@ func get_random_position():
 
 func set_path(value):
 	path = value
-	line_2d.points = path
-	if value.size() == 0:
-		return
+	if path != null:
+		line_2d.points = path
+		if value.size() == 0:
+			return
 
 

@@ -8,19 +8,17 @@
 [sub_resource type="GDScript" id=12]
 script/source = "extends StateMachine
 
-func _init():
+
+func _state_logic(_delta, _state): #Trien khai logic cho trang thai hien tai
 	pass
 
-func _state_logic(delta, state): #Trien khai logic cho trang thai hien tai
-	pass
-
-func _get_transition(delta): #Ham xac dinh trang thai moi
+func _get_transition(_delta): #Ham xac dinh trang thai moi
 	return null
 
-func _enter_state(new_state, old_state): #Ham xu ly cac logic khi chuan bi chuyen sang trang thai moi
+func _enter_state(_new_state, _old_state): #Ham xu ly cac logic khi chuan bi chuyen sang trang thai moi
 	pass
 
-func _exit_state(old_state, new_state): #Ham xu ly cac logic khi ra khoi trang thai hien tai
+func _exit_state(_old_state, _new_state): #Ham xu ly cac logic khi ra khoi trang thai hien tai
 	pass
 "
 
@@ -32,14 +30,15 @@ height = 6.0
 radius = 5.99999
 height = 6.0
 
-[sub_resource type="CircleShape2D" id=65]
-
-[sub_resource type="CircleShape2D" id=6]
-radius = 7.01142
-
 [sub_resource type="CapsuleShape2D" id=10]
 radius = 5.0
 height = 4.0
+
+[sub_resource type="CircleShape2D" id=71]
+radius = 105.019
+
+[sub_resource type="CircleShape2D" id=72]
+radius = 34.0147
 
 [sub_resource type="Animation" id=66]
 resource_name = "Die"
@@ -509,6 +508,10 @@ wait_time = 2.0
 wait_time = 3.0
 autostart = true
 
+[node name="AttackTime" type="Timer" parent="Timers" index="3"]
+wait_time = 0.25
+one_shot = true
+
 [node name="DamageArea" type="Area2D" parent="." index="4"]
 visible = false
 collision_mask = 0
@@ -519,21 +522,7 @@ position = Vector2( 0, -4 )
 rotation = 1.5708
 shape = SubResource( 9 )
 
-[node name="ActiveArea" parent="." index="5"]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ActiveArea" index="0"]
-scale = Vector2( 10, 10 )
-shape = SubResource( 65 )
-
-[node name="AttackArea" parent="." index="6"]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" index="0"]
-scale = Vector2( 5, 5 )
-shape = SubResource( 6 )
-
-[node name="Hitbox" parent="." index="7"]
+[node name="Hitbox" parent="." index="5"]
 visible = false
 collision_mask = 2
 
@@ -541,6 +530,18 @@ collision_mask = 2
 position = Vector2( 0, -4 )
 rotation = 1.5708
 shape = SubResource( 10 )
+
+[node name="PlayerDetectionZone" parent="." index="6"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
+shape = SubResource( 71 )
+
+[node name="AttackableZone" parent="." index="7"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackableZone" index="0"]
+shape = SubResource( 72 )
 
 [node name="AnimationCharacter" parent="Animation" index="0"]
 anims/Die = SubResource( 66 )
@@ -570,5 +571,3 @@ parameters/Preattack/blend_position = Vector2( 0, 0 )
 width = 2.0
 
 [connection signal="died" from="." to="." method="_on_Slime_died"]
-[connection signal="enter_idle_state" from="." to="." method="_on_Slime_enter_idle_state"]
-[connection signal="ready_enter_detect_state" from="." to="." method="_on_Slime_ready_enter_detect_state"]

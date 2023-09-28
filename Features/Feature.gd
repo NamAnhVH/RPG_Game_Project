@@ -7,11 +7,6 @@ export var max_health := 1.0
 
 onready var health = max_health setget set_health
 
-func set_health(value):
-	health = clamp(value, 0, max_health)
-	if health <= 0:
-		destroyed()
-
 func destroyed():
 	var grass_destroy_effect = load("res://Effects/GrassEffect.tscn").instance()
 	var world = get_tree().current_scene
@@ -22,3 +17,7 @@ func destroyed():
 func _on_Hitbox_feature_damaged():
 	set_health(health - 1)
 	
+func set_health(value):
+	health = clamp(value, 0, max_health)
+	if health <= 0:
+		destroyed()

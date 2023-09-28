@@ -7,20 +7,24 @@ const BIAS = Vector2(0, 5)
 var move_input := Vector2()
 var mouse := Vector2()
 
+func _unhandled_input(event):
+	if event.is_action_pressed("attack") && attack_cooldown.is_stopped():
+		state.set_state(States.ATTACK)
+		attack()
 
 func _ready():
 	set_state()
 
 func _physics_process(delta):
-	if state.get_state() == "MOVE":
+	if state.get_state() == States.MOVE:
 		move_state()
-	if state.get_state() == "ATTACK":
+	if state.get_state() == States.ATTACK:
 		attack_state()
 
 func set_state():
-	state.add_state("MOVE")
-	state.add_state("ATTACK")
-	state.set_state("MOVE")
+	state.add_state(States.MOVE)
+	state.add_state(States.ATTACK)
+	state.set_state(States.MOVE)
 
 func move_state():
 	move_input.x = -Input.get_action_strength("move_left") + Input.get_action_strength("move_right")
@@ -39,11 +43,6 @@ func move_state():
 	velocity = lerp(velocity, move_input * move_speed_unit * 24, get_move_weight())
 	velocity = move_and_slide(velocity)
 
-func _unhandled_input(event):
-	if event.is_action_pressed("attack") && attack_cooldown.is_stopped():
-		state.set_state("ATTACK")
-		attack()
-
 func attack_state():
 	velocity = Vector2.ZERO
 	animation_tree.set("parameters/Idle/blend_position", mouse)
@@ -58,6 +57,10 @@ func attack():
 	attack_area.position = mouse * HAND_RADIUS - BIAS
 	attack_area.set_attacker(self)
 
-
 func attack_animation_finished():
-	state.set_state("MOVE")
+	state.set_state(States.MOVE)
+
+
+func _on_PlayableCharacter_died():
+	queue_free()
+
