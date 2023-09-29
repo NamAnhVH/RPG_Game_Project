@@ -3,7 +3,7 @@ class_name BattleCharacter
 
 enum Factions {ALLY, ENEMY}
 
-signal died()
+signal new_health(amount)
 
 const KNOCKBACK_VELOCITY = 200
 
@@ -11,34 +11,26 @@ onready var attack_cooldown = $Timers/AttackCooldown
 onready var hitbox = $Hitbox
 onready var state = $StateMachine
 
-export var max_health = 8.0
 export (Factions) var faction = 0
-export var knockback_modifier = 1.0
-export var move_weight = 0.2
+export(bool) var knockback_modifier = true
+export var move_weight = 0.2 setget set_move_weight, get_move_weight
 
 var target_ref setget set_target, get_target
-
-onready var health = max_health setget set_health
-
-func set_health(value):
-	health = clamp(value, 0, max_health)
-	if health <= 0:
-		die()
-
-func die():
-	emit_signal("died")
 
 func _ready():
 	yield() #Them khoang thoi gian de khoi tao Globals
 	Globals.battle_arena.add_character(self)
 
+func knockback(knockback_strength, source_position):
+	var normal = (global_position - source_position).normalized()
+	if knockback_modifier:
+		velocity = knockback_strength * normal * KNOCKBACK_VELOCITY
+
 func _on_Hitbox_damaged(amount, knockback_strength, damage_source, attacker):
-	set_health(health - amount)
+	emit_signal("new_health", amount)
 	if damage_source != null:
 		knockback(knockback_strength, damage_source.global_position)
 	damage_animation.play("Damage")
-	if hitbox.immunity_duration != 0:
-		damage_animation.queue("Invulnerability")
 
 func _on_Hitbox_immunity_ended():
 	damage_animation.play("RESET")
@@ -54,11 +46,8 @@ func get_target():
 	if target_ref != null:
 		target = target_ref.get_ref()
 
-func knockback(knockback_strength, source_position):
-	var normal = (global_position - source_position).normalized()
-	if knockback_modifier != 0:
-		velocity = knockback_strength * normal * KNOCKBACK_VELOCITY
+func set_move_weight(value):
+	move_weight = value
 
 func get_move_weight():
 	return move_weight
-

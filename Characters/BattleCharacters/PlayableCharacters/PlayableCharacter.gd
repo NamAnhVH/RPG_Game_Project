@@ -6,6 +6,7 @@ const BIAS = Vector2(0, 5)
 
 var move_input := Vector2()
 var mouse := Vector2()
+var stats = PlayerStats
 
 func _unhandled_input(event):
 	if event.is_action_pressed("attack") && attack_cooldown.is_stopped():
@@ -13,6 +14,7 @@ func _unhandled_input(event):
 		attack()
 
 func _ready():
+	stats.connect("no_health", self, "queue_free")
 	set_state()
 
 func _physics_process(delta):
@@ -60,7 +62,5 @@ func attack():
 func attack_animation_finished():
 	state.set_state(States.MOVE)
 
-
-func _on_PlayableCharacter_died():
-	queue_free()
-
+func _on_PlayableCharacter_new_health(amount):
+	stats.set_health(stats.health - amount)

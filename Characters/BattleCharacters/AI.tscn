@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Characters/BattleCharacters/BattleCharacter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Characters/BattleCharacters/AI.gd" type="Script" id=2]
 [ext_resource path="res://Core/PlayerDetectionZone.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Core/AttackableZone.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Stats/HealthStat.tscn" type="PackedScene" id=5]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=1]
 
@@ -11,18 +12,24 @@
 script = ExtResource( 2 )
 max_active_area = 50
 
+[node name="Stats" type="Node" parent="." index="1"]
+
+[node name="HealthStat" parent="Stats" index="0" instance=ExtResource( 5 )]
+
 [node name="ChangeDirectionCooldown" type="Timer" parent="Timers" index="1"]
 
 [node name="IdleTime" type="Timer" parent="Timers" index="2"]
 one_shot = true
 
-[node name="PlayerDetectionZone" parent="." index="5" instance=ExtResource( 3 )]
+[node name="PlayerDetectionZone" parent="." index="6" instance=ExtResource( 3 )]
 
-[node name="AttackableZone" parent="." index="6" instance=ExtResource( 4 )]
+[node name="AttackableZone" parent="." index="7" instance=ExtResource( 4 )]
 
 [node name="AnimationTree" parent="Animation" index="1"]
 parameters/playback = SubResource( 1 )
 
+[connection signal="new_health" from="." to="." method="_on_AI_new_health"]
+[connection signal="no_health" from="Stats/HealthStat" to="." method="_on_HealthStat_no_health"]
 [connection signal="timeout" from="Timers/ChangeDirectionCooldown" to="." method="_on_ChangeDirectionCooldown_timeout"]
 [connection signal="timeout" from="Timers/IdleTime" to="." method="_on_IdleTime_timeout"]
 [connection signal="enter_chase_state" from="PlayerDetectionZone" to="." method="_on_PlayerDetectionZone_enter_chase_state"]

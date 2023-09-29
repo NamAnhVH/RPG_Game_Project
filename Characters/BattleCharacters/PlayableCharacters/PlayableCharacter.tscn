@@ -406,7 +406,6 @@ graph_offset = Vector2( -183.686, -2 )
 
 [node name="PlayableCharacter" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-max_health = 10.0
 
 [node name="StateMachine" parent="." index="0"]
 script = SubResource( 24 )
@@ -452,4 +451,4 @@ parameters/Attack/blend_position = Vector2( 0, 0 )
 parameters/Idle/blend_position = Vector2( -0.476142, -0.0568966 )
 parameters/Run/blend_position = Vector2( 0.0233502, -0.189655 )
 
-[connection signal="died" from="." to="." method="_on_PlayableCharacter_died"]
+[connection signal="new_health" from="." to="." method="_on_PlayableCharacter_new_health"]

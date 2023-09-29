@@ -2,11 +2,13 @@ extends BattleCharacter
 
 export var max_active_area = 50
 
+signal died()
 signal enter_idle_state()
 
 onready var change_direction_cooldown = $Timers/ChangeDirectionCooldown
 onready var idle_time = $Timers/IdleTime
 onready var line_2d = $Line2D
+onready var health_stat = $Stats/HealthStat
 
 onready var first_position = global_position
 onready var random_position = first_position setget set_random_position, get_random_position
@@ -97,6 +99,12 @@ func _on_AttackableZone_enter_chase_state():
 func _on_AttackableZone_ready_enter_chase_state():
 	return
 
+func _on_AI_new_health(amount):
+	health_stat.set_health(health_stat.health - amount)
+
+func _on_HealthStat_no_health():
+	emit_signal("died")
+
 func set_random_position(position):
 	random_position = position
 
@@ -109,5 +117,4 @@ func set_path(value):
 		line_2d.points = path
 		if value.size() == 0:
 			return
-
 
