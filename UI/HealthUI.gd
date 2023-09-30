@@ -1,10 +1,17 @@
-extends Control
+extends HBoxContainer
 
-var health_point setget set_health_point
-var max_health_point setget set_max_health_point
+onready var health_point = $HealthPoint
+onready var health_point_label = $HealthPoint/Label
 
-func set_health_point(value):
-	health_point = value
+var player_stats = PlayerStats
 
-func set_max_health_point(value):
-	max_health_point = value
+func _ready():
+	health_point.set_min(0)
+	health_point.set_max(player_stats.max_health)
+	health_point.set_value(player_stats.health)
+	health_point_label.set_text(String(player_stats.health))
+	player_stats.connect("new_health", self, "set_value")
+
+func set_value(health):
+	health_point.set_value(health)
+	health_point_label.set_text(String(health))

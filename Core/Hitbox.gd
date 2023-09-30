@@ -40,7 +40,7 @@ func _on_Hitbox_area_entered(area):
 				emit_signal("feature_damaged")
 			
 
-func damage(amount, knockback_strength, damage_source, attacker):
+func damage(amount, knockback_strength, damage_source: Area2D, attacker):
 	emit_signal("damaged", amount, knockback_strength, damage_source, attacker)
 	if immunity_duration > 0:
 		immunity_timmer.start(immunity_duration) #Bat dau thoi gian bat tu

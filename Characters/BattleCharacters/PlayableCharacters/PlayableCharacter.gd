@@ -62,5 +62,5 @@ func attack():
 func attack_animation_finished():
 	state.set_state(States.MOVE)
 
-func _on_PlayableCharacter_new_health(amount):
+func _on_PlayableCharacter_lose_health(amount):
 	stats.set_health(stats.health - amount)

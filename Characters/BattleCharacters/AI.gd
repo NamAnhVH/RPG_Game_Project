@@ -8,11 +8,13 @@ signal enter_idle_state()
 onready var change_direction_cooldown = $Timers/ChangeDirectionCooldown
 onready var idle_time = $Timers/IdleTime
 onready var line_2d = $Line2D
-onready var health_stat = $Stats/HealthStat
 
 onready var first_position = global_position
 onready var random_position = first_position setget set_random_position, get_random_position
 onready var path = PoolVector2Array() setget set_path
+export var max_health = 10.0
+
+onready var health = max_health setget set_health
 
 var direction = 0
 var idle = 0
@@ -36,12 +38,12 @@ func get_ideal_target():
 	else:
 		emit_signal("enter_idle_state")
 
-func move_towards(to, move_speed_unit):
+func move_towards(to: Vector2, move_speed_unit):
 	var displacement = to - global_position
 	var normal = displacement.normalized()
 	velocity = lerp(velocity, normal * move_speed_unit * 24, get_move_weight())
 
-func move_around_target(target, direction):
+func move_around_target(target: Vector2, direction):
 	var displacement = target - global_position
 	var normal = Vector2()
 	if direction == 0:
@@ -99,11 +101,13 @@ func _on_AttackableZone_enter_chase_state():
 func _on_AttackableZone_ready_enter_chase_state():
 	return
 
-func _on_AI_new_health(amount):
-	health_stat.set_health(health_stat.health - amount)
+func _on_AI_lose_health(amount):
+	set_health(health - amount)
 
-func _on_HealthStat_no_health():
-	emit_signal("died")
+func set_health(value):
+	health = clamp(value, 0, max_health)
+	if health <= 0:
+		emit_signal("died")
 
 func set_random_position(position):
 	random_position = position
@@ -111,10 +115,11 @@ func set_random_position(position):
 func get_random_position():
 	return random_position
 
-func set_path(value):
+func set_path(value: PoolVector2Array):
 	path = value
 	if path != null:
 		line_2d.points = path
 		if value.size() == 0:
 			return
+
 

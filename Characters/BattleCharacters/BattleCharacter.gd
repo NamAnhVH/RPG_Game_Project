@@ -3,7 +3,7 @@ class_name BattleCharacter
 
 enum Factions {ALLY, ENEMY}
 
-signal new_health(amount)
+signal lose_health(amount)
 
 const KNOCKBACK_VELOCITY = 200
 
@@ -21,13 +21,13 @@ func _ready():
 	yield() #Them khoang thoi gian de khoi tao Globals
 	Globals.battle_arena.add_character(self)
 
-func knockback(knockback_strength, source_position):
+func knockback(knockback_strength, source_position: Vector2):
 	var normal = (global_position - source_position).normalized()
 	if knockback_modifier:
 		velocity = knockback_strength * normal * KNOCKBACK_VELOCITY
 
-func _on_Hitbox_damaged(amount, knockback_strength, damage_source, attacker):
-	emit_signal("new_health", amount)
+func _on_Hitbox_damaged(amount, knockback_strength, damage_source: Area2D, attacker):
+	emit_signal("lose_health", amount)
 	if damage_source != null:
 		knockback(knockback_strength, damage_source.global_position)
 	damage_animation.play("Damage")

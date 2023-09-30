@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 onready var characters = $Entities
 onready var slime = $Entities/Slime

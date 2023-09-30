@@ -1,15 +1,46 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://UI/HealthUI.gd" type="Script" id=1]
+[ext_resource path="res://Art/bg.png" type="Texture" id=2]
+[ext_resource path="res://Art/fill.png" type="Texture" id=3]
+[ext_resource path="res://Font/m5x7.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Art/label_bg.png" type="Texture" id=5]
+[ext_resource path="res://Art/Label-HP.png" type="Texture" id=6]
 
-[node name="HealthUI" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = -103.0
-margin_bottom = -192.0
+[sub_resource type="DynamicFont" id=1]
+size = 13
+font_data = ExtResource( 4 )
+
+[node name="HealthUI" type="HBoxContainer"]
 script = ExtResource( 1 )
 
-[node name="TextureProgress" type="TextureProgress" parent="."]
-margin_right = 478.0
-margin_bottom = 55.0
-value = 50.0
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+margin_right = 19.0
+margin_bottom = 15.0
+texture = ExtResource( 5 )
+patch_margin_left = 19
+
+[node name="Label" type="TextureRect" parent="NinePatchRect"]
+margin_left = 3.33182
+margin_top = 3.66817
+margin_right = 16.3318
+margin_bottom = 11.6682
+texture = ExtResource( 6 )
+
+[node name="HealthPoint" type="TextureProgress" parent="."]
+margin_left = 23.0
+margin_right = 135.0
+margin_bottom = 15.0
+max_value = 1000.0
+value = 137.0
+texture_under = ExtResource( 2 )
+texture_progress = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="HealthPoint"]
+margin_left = 4.0
+margin_top = 2.0
+margin_right = 19.0
+margin_bottom = 13.0
+custom_colors/font_color = Color( 0.678431, 0.117647, 0.117647, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "100"
