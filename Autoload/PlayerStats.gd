@@ -3,7 +3,7 @@ extends Node
 signal no_health()
 signal new_health(health)
 
-export(int) var max_health = 1000
+export(int) var max_health = 100
 
 onready var health = max_health setget set_health
 

@@ -26,7 +26,7 @@ func get_ideal_target():
 	var potential_targets = []
 	var nearest_target = null
 	var distance = INF
-	for character in Globals.battle_arena.characters.get_children():
+	for character in Globals.map.characters.get_children():
 		if character.faction == BattleCharacter.Factions.ALLY:
 			var this_distance = (character.global_position - global_position).length()
 			if this_distance < distance:

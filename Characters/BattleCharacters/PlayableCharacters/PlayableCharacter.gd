@@ -4,6 +4,8 @@ class_name PlayableCharacter
 const HAND_RADIUS = 20
 const BIAS = Vector2(0, 5)
 
+onready var pick_up_zone = $PickUpZone
+
 var move_input := Vector2()
 var mouse := Vector2()
 var stats = PlayerStats
@@ -12,6 +14,11 @@ func _unhandled_input(event):
 	if event.is_action_pressed("attack") && attack_cooldown.is_stopped():
 		state.set_state(States.ATTACK)
 		attack()
+	if event.is_action_pressed("pickup"):
+		if pick_up_zone.items_in_range.size() > 0:
+			var pick_up_item = pick_up_zone.items_in_range.values()[0]
+			pick_up_item.pick_up_item(self)
+			pick_up_zone.items_in_range.erase(pick_up_item)
 
 func _ready():
 	stats.connect("no_health", self, "queue_free")

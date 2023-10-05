@@ -2,13 +2,29 @@ extends Node
 
 const UNIT_SIZE = 24
 
+
 var player = null
 var level = null
 var time = 0
-var battle_arena = null
+var map = null
 
 func _ready():
 	pass
 
 func _process(delta):
 	time += delta
+
+func drop_item(body: KinematicBody2D):
+	var item = preload("res://Item/ItemDrop.tscn").instance()
+	match randi() % 3:
+		0:
+			item.set_item_drop("Stone Sword", 1)
+		1:
+			item.set_item_drop("Iron Sword", 1)
+		2:
+			item.set_item_drop("Apple", 5)
+	map.entities.add_child(item)
+	item.drop_item(body)
+
+	
+	

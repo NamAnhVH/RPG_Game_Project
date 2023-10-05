@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/item_slot_empty_background.png-96210c6b429d323a9e2a0768344d1978.stex"
+path="res://.import/shirt_overlay.png-8d008789d1b94ded4e4f52bfd8edfb12.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Inventory/Item/item_slot_empty_background.png"
-dest_files=[ "res://.import/item_slot_empty_background.png-96210c6b429d323a9e2a0768344d1978.stex" ]
+source_file="res://Art/Inventory/Item/shirt_overlay.png"
+dest_files=[ "res://.import/shirt_overlay.png-8d008789d1b94ded4e4f52bfd8edfb12.stex" ]
 
 [params]
 

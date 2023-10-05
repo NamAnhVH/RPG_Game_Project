@@ -1,11 +1,12 @@
-extends Node
+extends Node2D
 
-onready var characters = $Entities
-onready var slime = $Entities/Slime
+onready var entities = $Entities
+onready var characters = $Entities/Characters
+onready var slime = $Entities/Characters/Slime
 onready var nav_2d = $Navigation2D
 
 func _ready():
-	Globals.battle_arena = self
+	Globals.map = self
 
 func _process(delta):
 	if is_instance_valid(slime):

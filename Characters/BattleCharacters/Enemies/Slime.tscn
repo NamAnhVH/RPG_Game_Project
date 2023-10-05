@@ -512,6 +512,7 @@ wait_time = 0.25
 one_shot = true
 
 [node name="DamageArea" type="Area2D" parent="." index="4"]
+visible = false
 collision_mask = 0
 script = ExtResource( 3 )
 
@@ -521,6 +522,7 @@ rotation = 1.5708
 shape = SubResource( 9 )
 
 [node name="Hitbox" parent="." index="5"]
+visible = false
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="1"]
@@ -528,8 +530,14 @@ position = Vector2( 0, -4 )
 rotation = 1.5708
 shape = SubResource( 10 )
 
+[node name="PlayerDetectionZone" parent="." index="6"]
+visible = false
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
 shape = SubResource( 71 )
+
+[node name="AttackableZone" parent="." index="7"]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackableZone" index="0"]
 shape = SubResource( 72 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=114 format=2]
+[gd_scene load_steps=116 format=2]
 
 [ext_resource path="res://Art/spring_outdoorsTileSheet_lightergrass.hu-HU.png" type="Texture" id=1]
 [ext_resource path="res://Art/Spring-Dirt-Path.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Features/Grass.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Characters/BattleCharacters/Enemies/Slime.tscn" type="PackedScene" id=7]
 [ext_resource path="res://UI/GUI.tscn" type="PackedScene" id=8]
+[ext_resource path="res://UI/UserInterface.tscn" type="PackedScene" id=9]
 
 [sub_resource type="TileSet" id=2]
 0/name = "spring_outdoorsTileSheet_lightergrass.hu-HU.png 0"
@@ -888,6 +889,8 @@ vertices = PoolVector2Array( 20, 68, 21, -3, 74, -14, 92, 7, 94, 76, 31, 77, 164
 polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 6, 7, 8, 9 ), PoolIntArray( 9, 8, 10, 4, 11 ), PoolIntArray( 8, 12, 13, 14, 15 ), PoolIntArray( 16, 17, 18, 19 ), PoolIntArray( 20, 21, 10, 8 ), PoolIntArray( 7, 6, 22 ), PoolIntArray( 18, 7, 22, 23 ), PoolIntArray( 24, 25, 26, 27 ), PoolIntArray( 23, 2, 1, 28 ), PoolIntArray( 18, 23, 28, 29 ), PoolIntArray( 19, 18, 29, 30 ), PoolIntArray( 31, 19, 30 ), PoolIntArray( 31, 30, 27, 32 ), PoolIntArray( 26, 32, 27 ), PoolIntArray( 3, 11, 4 ), PoolIntArray( 24, 27, 0, 5, 15, 14 ), PoolIntArray( 8, 15, 20 ) ]
 outlines = [ PoolVector2Array( -216, -133, -214, 136, -179.247, 135.837, -179, 43, -110, 46, -91, 61, -79, 72, -75, 94, -48, 95, -48, 117, -74, 117, -75, 134, 212, 134, 213, -135 ), PoolVector2Array( -119, -30, -22, 68, 20, 68, 21, -3, -65, -99, -119, -100 ), PoolVector2Array( 76, -119, 74, -14, 92, 7, 161, 6, 162, 8, 164, -92, 132, -119 ), PoolVector2Array( 31, 77, 29, 118, 55, 118, 57, 100, 93, 99, 94, 76 ) ]
 
+[sub_resource type="AnimationNodeStateMachinePlayback" id=111]
+
 [sub_resource type="ConvexPolygonShape2D" id=4]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 16, 16, 16, 16, 32, 0, 32 )
 
@@ -1138,7 +1141,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 16, 0, 16 )
 11/shapes = [  ]
 11/z_index = 0
 
-[node name="DebugMap" type="Node"]
+[node name="DebugMap" type="Node2D"]
 script = ExtResource( 5 )
 
 [node name="Background" type="TileMap" parent="."]
@@ -1215,6 +1218,7 @@ position = Vector2( 83, 87 )
 position = Vector2( 40, 108 )
 
 [node name="Navigation2D" type="Navigation2D" parent="."]
+visible = false
 position = Vector2( 240, 162 )
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
@@ -1223,11 +1227,17 @@ navpoly = SubResource( 39 )
 [node name="Entities" type="YSort" parent="."]
 position = Vector2( 240, 162 )
 
-[node name="PlayableCharacter" parent="Entities" instance=ExtResource( 3 )]
-position = Vector2( -148, -33 )
+[node name="Characters" type="YSort" parent="Entities"]
 
-[node name="Slime" parent="Entities" instance=ExtResource( 7 )]
-position = Vector2( 136, 52 )
+[node name="PlayableCharacter" parent="Entities/Characters" instance=ExtResource( 3 )]
+position = Vector2( -171, -34 )
+
+[node name="AnimationTree" parent="Entities/Characters/PlayableCharacter/Animation" index="1"]
+parameters/playback = SubResource( 111 )
+
+[node name="Slime" parent="Entities/Characters" instance=ExtResource( 7 )]
+position = Vector2( 123, 57 )
+max_health = 1.0
 
 [node name="Border" type="TileMap" parent="."]
 position = Vector2( 240, 162 )
@@ -1241,3 +1251,7 @@ position = Vector2( 240, 162 )
 current = true
 
 [node name="GUI" parent="." instance=ExtResource( 8 )]
+
+[node name="UserInterface" parent="." instance=ExtResource( 9 )]
+
+[editable path="Entities/Characters/PlayableCharacter"]

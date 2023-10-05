@@ -55,6 +55,7 @@ func animation_setup():
 func _on_Slime_died():
 	state.set_state(States.DIE)
 	animation_state.travel("Die")
+	Globals.drop_item(self)
 
 func die_animation_finished():
 	queue_free()

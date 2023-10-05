@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/default_inventory_background.png-77b920ce2e043f52d4383cb0e395c743.stex"
+path="res://.import/accessory_overlay.png-96cb3118cfe73af59873e81254bd23bc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Inventory/default_inventory_background.png"
-dest_files=[ "res://.import/default_inventory_background.png-77b920ce2e043f52d4383cb0e395c743.stex" ]
+source_file="res://Art/Inventory/Item/accessory_overlay.png"
+dest_files=[ "res://.import/accessory_overlay.png-96cb3118cfe73af59873e81254bd23bc.stex" ]
 
 [params]
 
