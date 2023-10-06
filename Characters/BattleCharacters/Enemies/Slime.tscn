@@ -508,7 +508,7 @@ wait_time = 2.0
 autostart = true
 
 [node name="AttackTime" parent="Timers" index="3"]
-wait_time = 0.25
+wait_time = 0.2
 one_shot = true
 
 [node name="DamageArea" type="Area2D" parent="." index="4"]

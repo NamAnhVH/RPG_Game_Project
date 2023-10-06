@@ -27,12 +27,13 @@ func get_ideal_target():
 	var nearest_target = null
 	var distance = INF
 	for character in Globals.map.characters.get_children():
-		if character.faction == BattleCharacter.Factions.ALLY:
-			var this_distance = (character.global_position - global_position).length()
-			if this_distance < distance:
-				nearest_target = character
-				distance = this_distance
-				distance = this_distance
+		if character is KinematicBody2D:
+			if character.faction == BattleCharacter.Factions.ALLY:  
+				var this_distance = (character.global_position - global_position).length()
+				if this_distance < distance:
+					nearest_target = character
+					distance = this_distance
+					distance = this_distance
 	if nearest_target != null:
 		return nearest_target
 	else:

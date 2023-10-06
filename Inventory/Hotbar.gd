@@ -30,17 +30,21 @@ func update_active_item_label():
 
 func slot_gui_input(event, slot: SLOT):
 	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT && event.pressed:
-			if parent.holding_item != null:
-				if !slot.item:
-					left_click_empty_item(slot)
-				else:
-					if parent.holding_item.item_name != slot.item.item_name:
-						left_click_different_item(event, slot)
+		if event.pressed:
+			if event.button_index == BUTTON_LEFT:
+				if parent.holding_item != null:
+					if !slot.item:
+						left_click_empty_item(slot)
 					else:
-						left_click_same_item(slot)
-			elif slot.item:
-				left_click_not_holding(slot)
+						if parent.holding_item.item_name != slot.item.item_name:
+							left_click_different_item(event, slot)
+						else:
+							left_click_same_item(slot)
+				elif slot.item:
+					left_click_not_holding(slot)
+			elif event.button_index == BUTTON_RIGHT:
+				if !parent.holding_item and slot.item:
+					drop_slot_item(slot)
 			update_active_item_label()
 
 func left_click_empty_item(slot: SLOT):
@@ -75,3 +79,13 @@ func left_click_not_holding(slot: SLOT):
 	parent.holding_item = slot.item
 	slot.pick_from_slot()
 	parent.holding_item.global_position = get_global_mouse_position()
+
+func drop_holding_item():
+	Globals.drop_item_from_player(parent.holding_item)
+	parent.holding_item.queue_free()
+	parent.holding_item = null
+
+func drop_slot_item(slot: SLOT):
+	PlayerInventory.remove_item(slot)
+	Globals.drop_item_from_player(slot.item)
+	slot.drop_from_slot()

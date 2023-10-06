@@ -6,6 +6,8 @@ onready var inventory_slots = $Inventory/InventorySlots
 onready var parent = get_parent()
 onready var equip_slots = $Equipment.get_children()
 
+var mouse_exited = false
+
 func _ready():
 	var slots = inventory_slots.get_children()
 	for i in range(slots.size()):
@@ -16,19 +18,11 @@ func _ready():
 	for i in range(equip_slots.size()):
 		equip_slots[i].connect("gui_input", self, "slot_gui_input", [equip_slots[i]])
 		equip_slots[i].slot_index = i
-	equip_slots[0].slot_type = SLOT.SlotType.HAT
-	equip_slots[1].slot_type = SLOT.SlotType.ACCESSORY
-	equip_slots[2].slot_type = SLOT.SlotType.SHIRT
-	equip_slots[3].slot_type = SLOT.SlotType.ACCESSORY
-	equip_slots[4].slot_type = SLOT.SlotType.ACCESSORY
-	equip_slots[5].slot_type = SLOT.SlotType.PANTS
-	equip_slots[6].slot_type = SLOT.SlotType.ACCESSORY
-	equip_slots[7].slot_type = SLOT.SlotType.ACCESSORY
-	equip_slots[8].slot_type = SLOT.SlotType.SHOES
-	equip_slots[9].slot_type = SLOT.SlotType.ACCESSORY
+	set_equip_slots()
 	
 	initialize_inventory()
 	initialize_equips()
+
 
 func initialize_inventory():
 	var slots = inventory_slots.get_children()
@@ -43,21 +37,30 @@ func initialize_equips():
 
 func slot_gui_input(event, slot: SLOT):
 	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT && event.pressed:
-			if parent.holding_item != null:
-				if !slot.item:
-					left_click_empty_item(slot)
-				else:
-					if parent.holding_item.item_name != slot.item.item_name:
-						left_click_different_item(event, slot)
+		if event.pressed:
+			if event.button_index == BUTTON_LEFT:
+				if parent.holding_item != null:
+					if !slot.item:
+						left_click_empty_item(slot)
 					else:
-						left_click_same_item(slot)
-			elif slot.item:
-				left_click_not_holding(slot)
+						if parent.holding_item.item_name != slot.item.item_name:
+							left_click_different_item(event, slot)
+						else:
+							left_click_same_item(slot)
+				elif slot.item:
+					left_click_not_holding(slot)
+			elif event.button_index == BUTTON_RIGHT:
+				if !parent.holding_item and slot.item:
+					drop_slot_item(slot)
 
 func _input(event):
+	var mouse = get_global_mouse_position()
 	if parent.holding_item:
-		parent.holding_item.global_position = get_global_mouse_position()
+		parent.holding_item.global_position = mouse
+		if event is InputEventMouseButton:
+			if event.pressed:
+				if event.button_index == BUTTON_RIGHT:
+					drop_holding_item()
 
 func able_to_put_into_slot(slot: SLOT):
 	var holding_item = parent.holding_item
@@ -115,3 +118,25 @@ func left_click_not_holding(slot: SLOT):
 	parent.holding_item = slot.item
 	slot.pick_from_slot()
 	parent.holding_item.global_position = get_global_mouse_position()
+
+func drop_holding_item():
+	Globals.drop_item_from_player(parent.holding_item)
+	parent.holding_item.queue_free()
+	parent.holding_item = null
+
+func drop_slot_item(slot: SLOT):
+	PlayerInventory.remove_item(slot)
+	Globals.drop_item_from_player(slot.item)
+	slot.drop_from_slot()
+
+func set_equip_slots():
+	equip_slots[0].slot_type = SLOT.SlotType.HAT
+	equip_slots[1].slot_type = SLOT.SlotType.ACCESSORY
+	equip_slots[2].slot_type = SLOT.SlotType.SHIRT
+	equip_slots[3].slot_type = SLOT.SlotType.ACCESSORY
+	equip_slots[4].slot_type = SLOT.SlotType.ACCESSORY
+	equip_slots[5].slot_type = SLOT.SlotType.PANTS
+	equip_slots[6].slot_type = SLOT.SlotType.ACCESSORY
+	equip_slots[7].slot_type = SLOT.SlotType.ACCESSORY
+	equip_slots[8].slot_type = SLOT.SlotType.SHOES
+	equip_slots[9].slot_type = SLOT.SlotType.ACCESSORY

@@ -55,7 +55,7 @@ func update_slot_visual(slot_index, item_name, new_quantity):
 		slot.initialize_item(item_name, new_quantity)
 
 func add_item_to_empty_slot(item: ITEM, slot: SLOT):
-	match slot.SlotType:
+	match slot.slot_type:
 		SLOT.SlotType.HOTBAR:
 			hotbar[slot.slot_index] = [item.item_name, item.item_quantity]
 		SLOT.SlotType.INVENTORY:
@@ -64,7 +64,7 @@ func add_item_to_empty_slot(item: ITEM, slot: SLOT):
 			equips[slot.slot_index] = [item.item_name, item.item_quantity]
 
 func remove_item(slot: SLOT):
-	match slot.SlotType:
+	match slot.slot_type:
 		SLOT.SlotType.HOTBAR:
 			hotbar.erase(slot.slot_index)
 		SLOT.SlotType.INVENTORY:
@@ -73,7 +73,7 @@ func remove_item(slot: SLOT):
 			equips.erase(slot.slot_index)
 
 func add_item_quantity(slot: SLOT, value):
-	match slot.SlotType:
+	match slot.slot_type:
 		SLOT.SlotType.HOTBAR:
 			hotbar[slot.slot_index][1] += value
 		SLOT.SlotType.INVENTORY:

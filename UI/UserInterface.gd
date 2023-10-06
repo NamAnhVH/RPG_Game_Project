@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 onready var inventory = $Inventory
+onready var inventory_texture = $Inventory/Inventory
 
 var holding_item = null
 

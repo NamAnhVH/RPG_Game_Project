@@ -72,6 +72,11 @@ func put_into_slot(new_item):
 	add_child(item)
 	refresh_style()
 
+func drop_from_slot():
+	remove_child(item)
+	item = null
+	refresh_style()
+
 func initialize_item(item_name, item_quantity):
 	if item == null:
 		item = ITEM.instance()
