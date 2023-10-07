@@ -12,28 +12,33 @@ func _ready():
 	var slots = inventory_slots.get_children()
 	for i in range(slots.size()):
 		slots[i].connect("gui_input", self, "slot_gui_input", [slots[i]])
+		slots[i].connect("mouse_entered", self, "open_information_item", [slots[i]])
+		slots[i].connect("mouse_exited", self, "close_information_item", [slots[i]])
 		slots[i].slot_index = i
 		slots[i].slot_type = SLOT.SlotType.INVENTORY
 		
 	for i in range(equip_slots.size()):
 		equip_slots[i].connect("gui_input", self, "slot_gui_input", [equip_slots[i]])
+		equip_slots[i].connect("mouse_entered", self, "open_information_item", [equip_slots[i]])
+		equip_slots[i].connect("mouse_exited", self, "close_information_item", [equip_slots[i]])
 		equip_slots[i].slot_index = i
 	set_equip_slots()
 	
 	initialize_inventory()
 	initialize_equips()
 
-
 func initialize_inventory():
 	var slots = inventory_slots.get_children()
 	for i in range(slots.size()):
-		if PlayerInventory.inventory.has(i):
-			slots[i].initialize_item(PlayerInventory.inventory[i][0], PlayerInventory.inventory[i][1])
+		var index = str(i)
+		if PlayerInventory.inventory.has(index):
+			slots[i].initialize_item(PlayerInventory.inventory[index][0], PlayerInventory.inventory[index][1], PlayerInventory.inventory[index][2])
 
 func initialize_equips():
 	for i in range(equip_slots.size()):
-		if PlayerInventory.equips.has(i):
-			equip_slots[i].initialize_item(PlayerInventory.equips[i][0], PlayerInventory.equips[i][1])
+		var index = str(i)
+		if PlayerInventory.equips.has(index):
+			equip_slots[i].initialize_item(PlayerInventory.equips[index][0], PlayerInventory.inventory[index][1])
 
 func slot_gui_input(event, slot: SLOT):
 	if event is InputEventMouseButton:
@@ -53,6 +58,15 @@ func slot_gui_input(event, slot: SLOT):
 				if !parent.holding_item and slot.item:
 					drop_slot_item(slot)
 
+func open_information_item(slot: SLOT):
+	if slot.item:
+		parent.information.set_information_item(slot.item)
+		parent.information.visible = true
+
+func close_information_item(slot: SLOT):
+	if parent.information.visible:
+		parent.information.visible = false
+
 func _input(event):
 	var mouse = get_global_mouse_position()
 	if parent.holding_item:
@@ -67,7 +81,7 @@ func able_to_put_into_slot(slot: SLOT):
 	if holding_item == null:
 		return true
 	var holding_item_category = JsonData.item_data[holding_item.item_name]["ItemCategory"]
-	if holding_item_category == "Clothes":
+	if holding_item_category == "Cloth":
 		holding_item_category = JsonData.item_data[holding_item.item_name]["ClothCategory"]
 	
 	if slot.slot_type == SLOT.SlotType.HAT:

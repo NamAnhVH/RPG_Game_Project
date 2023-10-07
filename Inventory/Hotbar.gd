@@ -11,6 +11,8 @@ func _ready():
 	PlayerInventory.connect("active_item_updated", self, "update_active_item_label")
 	for i in range(slots.size()):
 		slots[i].connect("gui_input", self, "slot_gui_input", [slots[i]])
+		slots[i].connect("mouse_entered", self, "open_information_item", [slots[i]])
+		slots[i].connect("mouse_exited", self, "close_information_item", [slots[i]])
 		PlayerInventory.connect("active_item_updated", slots[i], "refresh_style")
 		slots[i].slot_index = i
 		slots[i].slot_type = SLOT.SlotType.HOTBAR
@@ -19,8 +21,9 @@ func _ready():
 
 func initialize_inventory():
 	for i in range(slots.size()):
-		if PlayerInventory.hotbar.has(i):
-			slots[i].initialize_item(PlayerInventory.hotbar[i][0], PlayerInventory.hotbar[i][1])
+		var index = str(i)
+		if PlayerInventory.hotbar.has(index):
+			slots[i].initialize_item(PlayerInventory.hotbar[index][0], PlayerInventory.hotbar[index][1], PlayerInventory.hotbar[index][2])
 
 func update_active_item_label():
 	if slots[PlayerInventory.active_item_slot].item != null:
@@ -46,6 +49,15 @@ func slot_gui_input(event, slot: SLOT):
 				if !parent.holding_item and slot.item:
 					drop_slot_item(slot)
 			update_active_item_label()
+
+func open_information_item(slot: SLOT):
+	if parent.inventory.visible:
+		if slot.item:
+			parent.information.visible = true
+
+func close_information_item(slot: SLOT):
+	if parent.inventory.visible:
+		parent.information.visible = false
 
 func left_click_empty_item(slot: SLOT):
 	PlayerInventory.add_item_to_empty_slot(parent.holding_item, slot)

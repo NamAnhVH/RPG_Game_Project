@@ -10,6 +10,8 @@ const ACCELERATION = 1000
 
 var item_name
 var item_quantity
+var item_stat
+
 var player = null
 var being_picked_up = false
 var drop = false
@@ -19,10 +21,19 @@ var icon
 func _ready():
 	sprite.texture = icon
 
-func set_item_drop(name, quantity):
+func set_item_drop(name, stat, quantity: int = 1):
 	item_name = name
 	var item_category = JsonData.item_data[item_name]["ItemCategory"]
 	item_quantity = quantity
+	
+	match item_category:
+		"Consumable":
+			item_stat = JsonData.item_data[item_name]["Stat"]
+
+		"Weapon":
+			set_weapon_item_stat()
+#		"Cloth":
+#			set_cloth_item_stat()
 	icon = load("res://Art/" + item_category + "/" + item_name + ".png")
 
 func _physics_process(delta):
@@ -38,7 +49,7 @@ func _physics_process(delta):
 		
 		var distance = global_position.distance_to(player.global_position)
 		if distance < 4:
-			PlayerInventory.add_item(item_name, item_quantity)
+			PlayerInventory.add_item(item_name, item_stat, item_quantity)
 			queue_free()
 	velocity = move_and_slide(velocity)
 
@@ -52,3 +63,22 @@ func drop_item(body):
 
 func _on_DropTime_timeout():
 	velocity = Vector2.ZERO
+
+func set_weapon_item_stat():
+	var stat = {
+		"ATK": 0,
+		"CRIT_RATE": 0,
+		"CRIT_DAMAGE": 0,
+	}
+	match item_name:
+		"Stone Sword":
+			stat["ATK"] = 2
+			stat["CRIT_RATE"] = 2
+		"Iron Sword":
+			stat["ATK"] = 3
+			stat["CRIT_DAMAGE"] = 4
+	item_stat = stat
+
+func set_cloth_item_stat():
+	pass
+

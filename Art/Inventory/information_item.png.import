@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Farmer Pants.png-7aefbc9d0af1c6ea0e7bf4846d40cd58.stex"
+path="res://.import/information_item.png-a9b61f00890fcf00206b7454da30ca35.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Clothes/Farmer Pants.png"
-dest_files=[ "res://.import/Farmer Pants.png-7aefbc9d0af1c6ea0e7bf4846d40cd58.stex" ]
+source_file="res://Art/Inventory/information_item.png"
+dest_files=[ "res://.import/information_item.png-a9b61f00890fcf00206b7454da30ca35.stex" ]
 
 [params]
 

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Item/Item.gd" type="Script" id=1]
 [ext_resource path="res://Font/m5x7.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://Art/Clothes/Farmer Pants.png" type="Texture" id=3]
+[ext_resource path="res://Art/Cloth/Farmer Pants.png" type="Texture" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 outline_size = 1

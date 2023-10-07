@@ -77,11 +77,11 @@ func drop_from_slot():
 	item = null
 	refresh_style()
 
-func initialize_item(item_name, item_quantity):
+func initialize_item(item_name, item_stat, item_quantity = 1):
 	if item == null:
 		item = ITEM.instance()
 		add_child(item)
-		item.set_item(item_name, item_quantity)
+		item.set_item(item_name, item_stat, item_quantity)
 	else:
-		item.set_item(item_name, item_quantity)
+		item.set_item(item_name, item_stat, item_quantity)
 	refresh_style()
