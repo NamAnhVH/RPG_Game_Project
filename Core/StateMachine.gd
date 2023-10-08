@@ -14,16 +14,16 @@ func _physics_process(delta):
 		if transition != null:
 			set_state(transition)
 
-func _state_logic(delta, current_state): #Trien khai logic cho trang thai hien tai
+func _state_logic(_delta, _current_state): #Trien khai logic cho trang thai hien tai
 	pass
 
-func _get_transition(delta): #Ham xac dinh trang thai moi
+func _get_transition(_delta): #Ham xac dinh trang thai moi
 	return null
 
-func _enter_state(new_state, old_state): #Ham xu ly cac logic khi chuan bi chuyen sang trang thai moi
+func _enter_state(_new_state, _old_state): #Ham xu ly cac logic khi chuan bi chuyen sang trang thai moi
 	pass
 
-func _exit_state(old_state, new_state): #Ham xu ly cac logic khi ra khoi trang thai hien tai
+func _exit_state(_old_state, _new_state): #Ham xu ly cac logic khi ra khoi trang thai hien tai
 	pass
 
 func set_state(new_state):

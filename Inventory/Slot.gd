@@ -1,6 +1,6 @@
 extends Panel
+class_name Slot
 
-const ITEM = preload("res://Item/Item.tscn")
 const DEFAULT_TEX = preload("res://Art/Inventory/Item/item_slot_default.png")
 const EMPTY_TEX = preload("res://Art/Inventory/Item/item_slot_empty.png")
 const SELECTED_TEX = preload("res://Art/Inventory/Item/item_slot_selected.png")
@@ -16,6 +16,7 @@ var slot_type
 enum SlotType{
 	HOTBAR = 0,
 	INVENTORY,
+	WEAPON,
 	HAT,
 	SHIRT,
 	PANTS,
@@ -37,14 +38,18 @@ func refresh_style():
 		set("custom_styles/panel", selected_style)
 	elif item == null:
 		set("custom_styles/panel", empty_style)
-	else:
+	elif slot_type == SlotType.INVENTORY || slot_type == SlotType.HOTBAR:
 		set("custom_styles/panel", default_style)
+	else:
+		set("custom_styles/panel", selected_style)
 	if slot_type != SlotType.HOTBAR && slot_type != SlotType.INVENTORY:
 		var icon = get_child(0)
 		if item != null:
 			icon.texture = null
 		else:
 			match slot_type:
+				SlotType.WEAPON:
+					icon.texture = load("res://Art/Inventory/Item/weapon_overlay.png")
 				SlotType.HAT:
 					icon.texture = load("res://Art/Inventory/Item/hat_overlay.png")
 				SlotType.SHIRT:
@@ -79,7 +84,7 @@ func drop_from_slot():
 
 func initialize_item(item_name, item_stat, item_quantity = 1):
 	if item == null:
-		item = ITEM.instance()
+		item = preload("res://Item/Item.tscn").instance()
 		add_child(item)
 		item.set_item(item_name, item_stat, item_quantity)
 	else:

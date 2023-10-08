@@ -1,7 +1,5 @@
 extends Node2D
 
-const SLOT = preload("res://Inventory/Slot.gd")
-
 onready var inventory_slots = $Inventory/InventorySlots
 onready var parent = get_parent()
 onready var equip_slots = $Equipment.get_children()
@@ -15,7 +13,7 @@ func _ready():
 		slots[i].connect("mouse_entered", self, "open_information_item", [slots[i]])
 		slots[i].connect("mouse_exited", self, "close_information_item", [slots[i]])
 		slots[i].slot_index = i
-		slots[i].slot_type = SLOT.SlotType.INVENTORY
+		slots[i].slot_type = Slot.SlotType.INVENTORY
 		
 	for i in range(equip_slots.size()):
 		equip_slots[i].connect("gui_input", self, "slot_gui_input", [equip_slots[i]])
@@ -38,9 +36,9 @@ func initialize_equips():
 	for i in range(equip_slots.size()):
 		var index = str(i)
 		if PlayerInventory.equips.has(index):
-			equip_slots[i].initialize_item(PlayerInventory.equips[index][0], PlayerInventory.inventory[index][1])
+			equip_slots[i].initialize_item(PlayerInventory.equips[index][0], PlayerInventory.equips[index][1])
 
-func slot_gui_input(event, slot: SLOT):
+func slot_gui_input(event, slot: Slot):
 	if event is InputEventMouseButton:
 		if event.pressed:
 			if event.button_index == BUTTON_LEFT:
@@ -58,12 +56,12 @@ func slot_gui_input(event, slot: SLOT):
 				if !parent.holding_item and slot.item:
 					drop_slot_item(slot)
 
-func open_information_item(slot: SLOT):
+func open_information_item(slot: Slot):
 	if slot.item:
 		parent.information.set_information_item(slot.item)
 		parent.information.visible = true
 
-func close_information_item(slot: SLOT):
+func close_information_item(_slot: Slot):
 	if parent.information.visible:
 		parent.information.visible = false
 
@@ -76,34 +74,36 @@ func _input(event):
 				if event.button_index == BUTTON_RIGHT:
 					drop_holding_item()
 
-func able_to_put_into_slot(slot: SLOT):
+func able_to_put_into_slot(slot: Slot):
 	var holding_item = parent.holding_item
 	if holding_item == null:
 		return true
-	var holding_item_category = JsonData.item_data[holding_item.item_name]["ItemCategory"]
-	if holding_item_category == "Cloth":
-		holding_item_category = JsonData.item_data[holding_item.item_name]["ClothCategory"]
-	
-	if slot.slot_type == SLOT.SlotType.HAT:
-		return holding_item_category == "Hat"
-	elif slot.slot_type == SLOT.SlotType.SHIRT:
-		return holding_item_category == "Shirt"
-	elif slot.slot_type == SLOT.SlotType.PANTS:
-		return holding_item_category == "Pants"
-	elif slot.slot_type == SLOT.SlotType.SHOES:
-		return holding_item_category == "Shoes"
-	elif slot.slot_type == SLOT.SlotType.ACCESSORY:
-		return holding_item_category == "Accessory"
+	var holding_item_category = JsonData.item_data[holding_item.item_name][Items.ITEM_CATEGORY]
+	if holding_item_category == Items.CLOTH:
+		holding_item_category = JsonData.item_data[holding_item.item_name][Items.CLOTH_CATEGORY]
+		
+	if slot.slot_type == Slot.SlotType.WEAPON:
+		return holding_item_category == Items.WEAPON
+	elif slot.slot_type == Slot.SlotType.HAT:
+		return holding_item_category == Items.HAT
+	elif slot.slot_type == Slot.SlotType.SHIRT:
+		return holding_item_category == Items.SHIRT
+	elif slot.slot_type == Slot.SlotType.PANTS:
+		return holding_item_category == Items.PANTS
+	elif slot.slot_type == Slot.SlotType.SHOES:
+		return holding_item_category == Items.SHOES
+	elif slot.slot_type == Slot.SlotType.ACCESSORY:
+		return holding_item_category == Items.ACCESSORY
 	
 	return true
 
-func left_click_empty_item(slot: SLOT):
+func left_click_empty_item(slot: Slot):
 	if able_to_put_into_slot(slot):
 		PlayerInventory.add_item_to_empty_slot(parent.holding_item, slot)
 		slot.put_into_slot(parent.holding_item)
 		parent.holding_item = null
 
-func left_click_different_item(event: InputEvent, slot: SLOT):
+func left_click_different_item(event: InputEvent, slot: Slot):
 	if able_to_put_into_slot(slot):
 		PlayerInventory.remove_item(slot)
 		PlayerInventory.add_item_to_empty_slot(parent.holding_item, slot)
@@ -127,30 +127,32 @@ func left_click_same_item(slot):
 			slot.item.add_item_quantity(able_to_add)
 			parent.holding_item.decrease_item_quantity(able_to_add)
 
-func left_click_not_holding(slot: SLOT):
+func left_click_not_holding(slot: Slot):
 	PlayerInventory.remove_item(slot)
 	parent.holding_item = slot.item
 	slot.pick_from_slot()
 	parent.holding_item.global_position = get_global_mouse_position()
 
+
+# Sua lai item (item_drop => item)
 func drop_holding_item():
-	Globals.drop_item_from_player(parent.holding_item)
+	Globals.drop_item(parent.holding_item, Globals.player)
 	parent.holding_item.queue_free()
 	parent.holding_item = null
 
-func drop_slot_item(slot: SLOT):
+func drop_slot_item(slot: Slot):
 	PlayerInventory.remove_item(slot)
-	Globals.drop_item_from_player(slot.item)
+	Globals.drop_item(slot.item, Globals.player)
 	slot.drop_from_slot()
 
 func set_equip_slots():
-	equip_slots[0].slot_type = SLOT.SlotType.HAT
-	equip_slots[1].slot_type = SLOT.SlotType.ACCESSORY
-	equip_slots[2].slot_type = SLOT.SlotType.SHIRT
-	equip_slots[3].slot_type = SLOT.SlotType.ACCESSORY
-	equip_slots[4].slot_type = SLOT.SlotType.ACCESSORY
-	equip_slots[5].slot_type = SLOT.SlotType.PANTS
-	equip_slots[6].slot_type = SLOT.SlotType.ACCESSORY
-	equip_slots[7].slot_type = SLOT.SlotType.ACCESSORY
-	equip_slots[8].slot_type = SLOT.SlotType.SHOES
-	equip_slots[9].slot_type = SLOT.SlotType.ACCESSORY
+	equip_slots[0].slot_type = Slot.SlotType.HAT
+	equip_slots[1].slot_type = Slot.SlotType.ACCESSORY
+	equip_slots[2].slot_type = Slot.SlotType.SHIRT
+	equip_slots[3].slot_type = Slot.SlotType.WEAPON
+	equip_slots[4].slot_type = Slot.SlotType.ACCESSORY
+	equip_slots[5].slot_type = Slot.SlotType.PANTS
+	equip_slots[6].slot_type = Slot.SlotType.ACCESSORY
+	equip_slots[7].slot_type = Slot.SlotType.ACCESSORY
+	equip_slots[8].slot_type = Slot.SlotType.SHOES
+	equip_slots[9].slot_type = Slot.SlotType.ACCESSORY

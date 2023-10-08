@@ -42,16 +42,16 @@ text = "Text"
 [node name="Stat" type="Label" parent="InformationItem"]
 margin_left = 11.0
 margin_top = 20.0
-margin_right = 70.0
+margin_right = 98.0
 margin_bottom = 34.0
 custom_fonts/font = SubResource( 2 )
 text = "+ 2 CRIT DAMAGE"
 autowrap = true
 
 [node name="Description" type="Label" parent="InformationItem"]
-margin_left = 73.0
+margin_left = 103.0
 margin_top = 21.0
-margin_right = 132.0
+margin_right = 183.0
 margin_bottom = 84.0
 custom_fonts/font = SubResource( 3 )
 text = "Mạnh mẽ, vỏ đá dày, lá xanh sần sùi, hoa trắng tinh khôi. Phòng thủ xuất sắc, biểu tượng sức mạnh và bền bỉ."

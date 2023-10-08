@@ -24,7 +24,7 @@ func _ready():
 	stats.connect("no_health", self, "queue_free")
 	set_state()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if state.get_state() == States.MOVE:
 		move_state()
 	if state.get_state() == States.ATTACK:

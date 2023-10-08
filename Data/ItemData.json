@@ -2,20 +2,26 @@
     "Stone Sword": {
         "ItemCategory": "Weapon",
         "WeaponCategory": "Sword",
+        "BasicStat": {
+            "Atk" : 1
+        },
         "StackSize": 1,
         "Description": "Mạnh mẽ, vỏ đá dày, lá xanh sần sùi, hoa trắng tinh khôi. Phòng thủ xuất sắc, biểu tượng sức mạnh và bền bỉ."
     },
     "Iron Sword": {
         "ItemCategory": "Weapon",
         "WeaponCategory": "Sword",
+        "BasicStat": {
+            "Atk": 2
+        },
         "StackSize": 1,
         "Description": "Lưỡi sắt bén, cầm nắm chắc chắn. Sự lựa chọn hoàn hảo cho chiến đấu gần gũi."
     },
     "Apple": {
         "ItemCategory": "Consumable",
-        "Stat": {
-            "AddHealth": 2,
-            "AddEnergy": 2
+        "BasicStat": {
+            "RestoreHealth": 2,
+            "RestoreEnergy": 2
         },
         "StackSize": 99,
         "Description": "Một loại quả ngon, cung cấp năng lượng và khôi phục sức khỏe."

@@ -16,7 +16,7 @@ font_data = ExtResource( 4 )
 script = ExtResource( 3 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
-margin_right = 211.0
+margin_right = 169.0
 margin_bottom = 22.0
 texture = ExtResource( 1 )
 

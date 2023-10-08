@@ -9,6 +9,7 @@
 [ext_resource path="res://Art/Inventory/Item/shoes_overlay.png" type="Texture" id=7]
 [ext_resource path="res://Art/Inventory/Item/accessory_overlay.png" type="Texture" id=8]
 [ext_resource path="res://Art/Inventory/Item/hat_overlay.png" type="Texture" id=9]
+[ext_resource path="res://Art/Inventory/Item/weapon_overlay.png" type="Texture" id=10]
 
 [sub_resource type="StyleBoxTexture" id=1]
 
@@ -19,8 +20,6 @@
 [sub_resource type="StyleBoxTexture" id=4]
 
 [sub_resource type="StyleBoxTexture" id=5]
-
-[sub_resource type="StyleBoxTexture" id=6]
 
 [sub_resource type="StyleBoxTexture" id=7]
 
@@ -398,10 +397,10 @@ custom_styles/panel = SubResource( 2 )
 script = ExtResource( 3 )
 
 [node name="Equipment" type="TextureRect" parent="."]
-margin_left = -111.369
+margin_left = -152.749
 margin_top = -0.707108
-margin_right = -71.3693
-margin_bottom = 39.2929
+margin_right = -67.749
+margin_bottom = 133.293
 texture = ExtResource( 2 )
 
 [node name="Hat" type="Panel" parent="Equipment"]
@@ -446,29 +445,29 @@ custom_styles/panel = SubResource( 5 )
 script = ExtResource( 3 )
 
 [node name="TextureRect" type="TextureRect" parent="Equipment/Shirt"]
-margin_left = 2.36349
+margin_left = 2.66079
 margin_top = 2.83793
-margin_right = 15.3635
+margin_right = 15.6608
 margin_bottom = 14.8379
 texture = ExtResource( 5 )
 
-[node name="Accessory2" type="Panel" parent="Equipment"]
-margin_left = 56.3392
-margin_top = 43.9842
-margin_right = 74.3392
-margin_bottom = 61.9842
+[node name="Weapon" type="Panel" parent="Equipment"]
+margin_left = 56.2553
+margin_top = 43.6354
+margin_right = 74.2553
+margin_bottom = 61.6354
 rect_min_size = Vector2( 18, 18 )
-custom_styles/panel = SubResource( 6 )
+custom_styles/panel = SubResource( 5 )
 script = ExtResource( 3 )
 
-[node name="TextureRect" type="TextureRect" parent="Equipment/Accessory2"]
-margin_left = 4.78978
-margin_top = 4.05112
-margin_right = 12.7898
-margin_bottom = 14.0511
-texture = ExtResource( 8 )
+[node name="TextureRect" type="TextureRect" parent="Equipment/Weapon"]
+margin_left = 0.891032
+margin_top = 0.806211
+margin_right = 16.891
+margin_bottom = 16.8062
+texture = ExtResource( 10 )
 
-[node name="Accessory3" type="Panel" parent="Equipment"]
+[node name="Accessory2" type="Panel" parent="Equipment"]
 margin_left = 11.8153
 margin_top = 72.1556
 margin_right = 29.8153
@@ -477,7 +476,7 @@ rect_min_size = Vector2( 18, 18 )
 custom_styles/panel = SubResource( 7 )
 script = ExtResource( 3 )
 
-[node name="TextureRect" type="TextureRect" parent="Equipment/Accessory3"]
+[node name="TextureRect" type="TextureRect" parent="Equipment/Accessory2"]
 margin_left = 4.78978
 margin_top = 4.05112
 margin_right = 12.7898
@@ -494,13 +493,13 @@ custom_styles/panel = SubResource( 8 )
 script = ExtResource( 3 )
 
 [node name="TextureRect" type="TextureRect" parent="Equipment/Pants"]
-margin_left = 2.3784
+margin_left = 2.53589
 margin_top = 2.08112
-margin_right = 15.3784
+margin_right = 15.5359
 margin_bottom = 15.0811
 texture = ExtResource( 6 )
 
-[node name="Accessory4" type="Panel" parent="Equipment"]
+[node name="Accessory3" type="Panel" parent="Equipment"]
 margin_left = 56.2205
 margin_top = 71.7791
 margin_right = 74.2205
@@ -509,14 +508,14 @@ rect_min_size = Vector2( 18, 18 )
 custom_styles/panel = SubResource( 9 )
 script = ExtResource( 3 )
 
-[node name="TextureRect" type="TextureRect" parent="Equipment/Accessory4"]
+[node name="TextureRect" type="TextureRect" parent="Equipment/Accessory3"]
 margin_left = 4.78978
 margin_top = 4.05112
 margin_right = 12.7898
 margin_bottom = 14.0511
 texture = ExtResource( 8 )
 
-[node name="Accessory5" type="Panel" parent="Equipment"]
+[node name="Accessory4" type="Panel" parent="Equipment"]
 margin_left = 11.9344
 margin_top = 100.069
 margin_right = 29.9344
@@ -525,7 +524,7 @@ rect_min_size = Vector2( 18, 18 )
 custom_styles/panel = SubResource( 10 )
 script = ExtResource( 3 )
 
-[node name="TextureRect" type="TextureRect" parent="Equipment/Accessory5"]
+[node name="TextureRect" type="TextureRect" parent="Equipment/Accessory4"]
 margin_left = 4.78978
 margin_top = 4.05112
 margin_right = 12.7898
@@ -542,13 +541,13 @@ custom_styles/panel = SubResource( 10 )
 script = ExtResource( 3 )
 
 [node name="TextureRect" type="TextureRect" parent="Equipment/Shoes"]
-margin_left = 1.0
+margin_left = 1.50056
 margin_top = 6.0
-margin_right = 16.0
+margin_right = 16.5006
 margin_bottom = 14.0
 texture = ExtResource( 7 )
 
-[node name="Accessory6" type="Panel" parent="Equipment"]
+[node name="Accessory5" type="Panel" parent="Equipment"]
 margin_left = 56.2205
 margin_top = 99.8407
 margin_right = 74.2205
@@ -557,7 +556,7 @@ rect_min_size = Vector2( 18, 18 )
 custom_styles/panel = SubResource( 11 )
 script = ExtResource( 3 )
 
-[node name="TextureRect" type="TextureRect" parent="Equipment/Accessory6"]
+[node name="TextureRect" type="TextureRect" parent="Equipment/Accessory5"]
 margin_left = 4.78978
 margin_top = 4.05112
 margin_right = 12.7898

@@ -26,7 +26,7 @@ func knockback(knockback_strength, source_position: Vector2):
 	if knockback_modifier:
 		velocity = knockback_strength * normal * KNOCKBACK_VELOCITY
 
-func _on_Hitbox_damaged(amount, knockback_strength, damage_source: Area2D, attacker):
+func _on_Hitbox_damaged(amount, knockback_strength, damage_source: Area2D, _attacker):
 	emit_signal("lose_health", amount)
 	if damage_source != null:
 		knockback(knockback_strength, damage_source.global_position)
@@ -42,9 +42,8 @@ func set_target(value):
 		target_ref = weakref(value)
 
 func get_target():
-	var target = null
 	if target_ref != null:
-		target = target_ref.get_ref()
+		return target_ref.get_ref()
 
 func set_move_weight(value):
 	move_weight = value

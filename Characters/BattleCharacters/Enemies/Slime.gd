@@ -22,7 +22,7 @@ func idle_state():
 func attacking_state():
 	if !attack_cooldown.is_stopped():
 		if attack_time.is_stopped():
-			move_around_target(target.global_position, direction)
+			move_around_target(target.global_position)
 	else:
 		state.set_state(States.PRE_ATTACK)
 
@@ -52,11 +52,24 @@ func animation_setup():
 	else:
 		animation_state.travel("Idle")
 
+#Thêm ti le roi item cho slime
+func drop_item():
+	var item = preload("res://Item/Item.gd").new()
+	match randi() % 3: #DROP ITEM RATE
+		0:
+			item.set_item("Stone Sword", {Items.CRIT_RATE: 2})
+		1:
+			item.set_item("Iron Sword", {Items.CRIT_DAMAGE: 2})
+		2:
+			item.set_item("Apple", {}, 5)
+	Globals.drop_item(item, self)
+
+
+#_on_enemy_died()
 func _on_Slime_died():
 	state.set_state(States.DIE)
 	animation_state.travel("Die")
-	# add func drop_item
-	Globals.drop_item_from_enemy(self)
+	drop_item()
 
 func die_animation_finished():
 	queue_free()

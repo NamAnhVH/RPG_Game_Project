@@ -16,14 +16,14 @@ export var max_health = 10.0
 
 onready var health = max_health setget set_health
 
-var direction = 0
+var direction
 var idle = 0
 
 func _ready():
 	idle_time.start()
+	direction = 0
 
 func get_ideal_target():
-	var potential_targets = []
 	var nearest_target = null
 	var distance = INF
 	for character in Globals.map.characters.get_children():
@@ -44,7 +44,7 @@ func move_towards(to: Vector2, move_speed_unit):
 	var normal = displacement.normalized()
 	velocity = lerp(velocity, normal * move_speed_unit * 24, get_move_weight())
 
-func move_around_target(target: Vector2, direction):
+func move_around_target(target: Vector2):
 	var displacement = target - global_position
 	var normal = Vector2()
 	if direction == 0:
@@ -63,8 +63,8 @@ func move_along_path():
 func stop_moving():
 	velocity = Vector2.ZERO
 
-func _apply_movement(delta):
-	  move_and_slide(velocity)
+func _apply_movement(_delta):
+	  velocity = move_and_slide(velocity)
 
 func generate_random_target():
 	var angle = rand_range(0, 2 * PI)

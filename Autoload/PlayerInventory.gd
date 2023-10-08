@@ -27,7 +27,7 @@ var active_item_slot = 0
 func add_item(item_name, item_stat, item_quantity):
 	for item in inventory:
 		if inventory[item][0] == item_name:
-			var stack_size = int(JsonData.item_data[item_name]["StackSize"])
+			var stack_size = int(JsonData.item_data[item_name][Items.STACK_SIZE])
 			var able_to_add = stack_size - inventory[item][2]
 			if able_to_add >= item_quantity:
 				inventory[item][2] += item_quantity
@@ -79,7 +79,6 @@ func remove_item(slot: SLOT):
 			JsonData.update_inventory(HOTBAR, hotbar)
 		SLOT.SlotType.INVENTORY:
 			inventory.erase(slot_index)
-			print(inventory)
 			JsonData.update_inventory(INVENTORY, inventory)
 		_:
 			equips.erase(slot_index)

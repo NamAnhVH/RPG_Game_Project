@@ -1,7 +1,6 @@
 extends Area2D
 
 signal damaged(amount, knockback_strength, damage_source, attacker)
-signal immunity_started()
 signal immunity_ended()
 signal feature_damaged()
 
@@ -17,7 +16,7 @@ var exceptions = []
 func add_exception(node: Node2D): # Them node vao danh sach exception va tu xoa khoi danh sach neu doi tuong bi pha huy
 	if node != null:
 		exceptions.append(node)
-		node.connect("tree_exiting", self, "remove_exception", [node])
+		#node.connect("tree_exiting", self, "remove_exception", [node])
 
 func remove_exception(node: Node2D):
 	if node in exceptions:
