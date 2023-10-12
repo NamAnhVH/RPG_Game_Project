@@ -13,7 +13,6 @@ var bottom_position = Vector2()
 func _ready():
 	Globals.map = self
 	Globals.player = player
-	set_limit_camera()
 
 func _process(_delta):
 	# fix for each enemy
@@ -28,8 +27,3 @@ func _process(_delta):
 			enemies[i].set_path(new_path)
 	
 
-func set_limit_camera():
-	camera.limit_left = -704;
-	camera.limit_right = 672;
-	camera.limit_top = -416;
-	camera.limit_bottom = 480;

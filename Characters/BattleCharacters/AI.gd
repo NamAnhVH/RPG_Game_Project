@@ -80,11 +80,11 @@ func _on_ChangeDirectionCooldown_timeout():
 func _on_IdleTime_timeout():
 	if idle == 0:
 		idle = 1
-		idle_time.set_wait_time(2)
+		idle_time.set_wait_time(rand_range(1,3))
 		idle_time.start()
 	else: 
 		idle = 0
-		idle_time.set_wait_time(5)
+		idle_time.set_wait_time(rand_range(4,6))
 		idle_time.start()
 
 func _on_PlayerDetectionZone_enter_chase_state():

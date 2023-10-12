@@ -42,7 +42,8 @@ func set_item(name, stat, quantity = 1):
 	
 	item_description = JsonData.item_data[item_name][Items.DESCRIPTION]
 	if JsonData.item_data[item_name].has(Items.BASIC_STAT):
-		item_stat = JsonData.item_data[item_name][Items.BASIC_STAT]
+		item_stat = JsonData.item_data[item_name][Items.BASIC_STAT].duplicate()
 	item_stat.merge(stat)
+
 
 

@@ -5,6 +5,22 @@
         "BasicStat": {
             "Atk" : 1
         },
+        "RandomStat": {
+            "CritDamage": {
+                "Rate": 30,
+                "Stat": {
+                    "Min": 3,
+                    "Max": 7
+                }
+            },
+            "CritRate": {
+                "Rate": 30,
+                "Stat": {
+                    "Min": 1,
+                    "Max": 4
+                }
+            }
+        },
         "StackSize": 1,
         "Description": "Mạnh mẽ, vỏ đá dày, lá xanh sần sùi, hoa trắng tinh khôi. Phòng thủ xuất sắc, biểu tượng sức mạnh và bền bỉ."
     },
@@ -13,6 +29,22 @@
         "WeaponCategory": "Sword",
         "BasicStat": {
             "Atk": 2
+        },
+        "RandomStat": {
+            "CritDamage": {
+                "Rate": 30,
+                "Stat": {
+                    "Min": 5,
+                    "Max": 10
+                }
+            },
+            "CritRate": {
+                "Rate": 30,
+                "Stat": {
+                    "Min": 2,
+                    "Max": 5
+                }
+            }
         },
         "StackSize": 1,
         "Description": "Lưỡi sắt bén, cầm nắm chắc chắn. Sự lựa chọn hoàn hảo cho chiến đấu gần gũi."

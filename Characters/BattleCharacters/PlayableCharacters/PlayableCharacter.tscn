@@ -1,34 +1,15 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Characters/BattleCharacters/BattleCharacter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Characters/BattleCharacters/PlayableCharacters/PlayableCharacter.gd" type="Script" id=2]
 [ext_resource path="res://Art/Character.png" type="Texture" id=3]
 [ext_resource path="res://Core/PickUpZone.tscn" type="PackedScene" id=4]
 
-[sub_resource type="GDScript" id=24]
-script/source = "extends StateMachine
-
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = \"text\"
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-"
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 5.75 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 4, 4.75 )
+extents = Vector2( 7.25743, 8.10024 )
 
 [sub_resource type="RectangleShape2D" id=60]
 extents = Vector2( 10.3945, 9.55172 )
@@ -411,9 +392,6 @@ graph_offset = Vector2( -183.686, -2 )
 [node name="PlayableCharacter" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
-[node name="StateMachine" parent="." index="0"]
-script = SubResource( 24 )
-
 [node name="Sprite" parent="Body" index="0"]
 texture = ExtResource( 3 )
 offset = Vector2( 0, -10 )
@@ -421,17 +399,15 @@ hframes = 6
 vframes = 16
 
 [node name="CollisionShape2D" parent="." index="2"]
-visible = false
 position = Vector2( 0, 0.75 )
 shape = SubResource( 1 )
 
 [node name="Hitbox" parent="." index="4"]
-visible = false
 collision_mask = 1
-immunity_duration = 0.5
+immunity_duration = 0.25
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="1"]
-position = Vector2( 0, -1.25 )
+position = Vector2( 0.00246811, -1.62836 )
 shape = SubResource( 2 )
 
 [node name="PickUpZone" parent="." index="5" instance=ExtResource( 4 )]

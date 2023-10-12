@@ -1,4 +1,5 @@
 extends Enemy
+class_name Slime
 
 func chase_state():
 	target = get_target()
@@ -40,7 +41,7 @@ func pre_attack_animation_finished():
 		state.set_state(States.ATTACKING)
 
 func attack():
-	move_towards(target.global_position, 50.0)
+	move_towards(target.global_position, 50)
 	attack_time.start()
 	attack_cooldown.start()
 
@@ -54,16 +55,7 @@ func animation_setup():
 
 #Thêm ti le roi item cho slime
 func drop_item():
-	var item = preload("res://Item/Item.gd").new()
-	match randi() % 3: #DROP ITEM RATE
-		0:
-			item.set_item("Stone Sword", {Items.CRIT_RATE: 2})
-		1:
-			item.set_item("Iron Sword", {Items.CRIT_DAMAGE: 2})
-		2:
-			item.set_item("Apple", {}, 5)
-	Globals.drop_item(item, self)
-
+	pass
 
 #_on_enemy_died()
 func _on_Slime_died():

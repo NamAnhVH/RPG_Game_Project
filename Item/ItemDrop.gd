@@ -27,14 +27,7 @@ func set_item_drop(name, stat, quantity: int = 1):
 	var item_category = JsonData.item_data[item_name][Items.ITEM_CATEGORY]
 	item_quantity = quantity
 	
-	match item_category:
-		Items.CONSUMABLE:
-			item_stat = JsonData.item_data[item_name][Items.BASIC_STAT]
-
-		Items.WEAPON:
-			set_weapon_item_stat(stat)
-#		"Cloth":
-#			set_cloth_item_stat()
+	item_stat = stat
 	icon = load("res://Art/" + item_category + "/" + item_name + ".png")
 
 func _physics_process(delta):
@@ -64,12 +57,3 @@ func drop_item(body):
 
 func _on_DropTime_timeout():
 	velocity = Vector2.ZERO
-
-
-# fix stat
-func set_weapon_item_stat(stat):
-	item_stat = stat
-
-func set_cloth_item_stat():
-	pass
-

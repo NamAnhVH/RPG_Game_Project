@@ -115,7 +115,7 @@ func left_click_different_item(event: InputEvent, slot: Slot):
 
 func left_click_same_item(slot):
 	if able_to_put_into_slot(slot):
-		var stack_size = int(JsonData.item_data[slot.item.item_name]["StackSize"])
+		var stack_size = int(JsonData.item_data[slot.item.item_name][Items.STACK_SIZE])
 		var able_to_add = stack_size - slot.item.item_quantity
 		if able_to_add >= parent.holding_item.item_quantity:
 			PlayerInventory.add_item_quantity(slot, parent.holding_item.item_quantity)
@@ -132,7 +132,6 @@ func left_click_not_holding(slot: Slot):
 	parent.holding_item = slot.item
 	slot.pick_from_slot()
 	parent.holding_item.global_position = get_global_mouse_position()
-
 
 # Sua lai item (item_drop => item)
 func drop_holding_item():

@@ -21,24 +21,24 @@ func _ready():
 	hotbar = JsonData.player_inventory_data[HOTBAR]
 	equips = JsonData.player_inventory_data[EQUIPS]
 	
-
 var active_item_slot = 0
 
 func add_item(item_name, item_stat, item_quantity):
 	for item in inventory:
 		if inventory[item][0] == item_name:
 			var stack_size = int(JsonData.item_data[item_name][Items.STACK_SIZE])
-			var able_to_add = stack_size - inventory[item][2]
-			if able_to_add >= item_quantity:
-				inventory[item][2] += item_quantity
-				JsonData.update_inventory(INVENTORY, inventory)
-				update_slot_visual(item, inventory[item][0], item_stat, inventory[item][2])
-				return
-			else:
-				inventory[item][2] += able_to_add
-				update_slot_visual(item, inventory[item][0], item_stat, inventory[item][2])
-				JsonData.update_inventory(INVENTORY, inventory)
-				item_quantity = item_quantity - able_to_add
+			if stack_size > 1:
+				var able_to_add = stack_size - inventory[item][2]
+				if able_to_add >= item_quantity:
+					inventory[item][2] += item_quantity
+					JsonData.update_inventory(INVENTORY, inventory)
+					update_slot_visual(item, inventory[item][0], item_stat, inventory[item][2])
+					return
+				else:
+					inventory[item][2] += able_to_add
+					update_slot_visual(item, inventory[item][0], item_stat, inventory[item][2])
+					JsonData.update_inventory(INVENTORY, inventory)
+					item_quantity = item_quantity - able_to_add
 	
 	for i in range(NUM_INVENTORY_SLOTS):
 		var index = str(i)

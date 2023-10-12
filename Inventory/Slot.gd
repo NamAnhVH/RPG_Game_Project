@@ -84,7 +84,7 @@ func drop_from_slot():
 
 func initialize_item(item_name, item_stat, item_quantity = 1):
 	if item == null:
-		item = preload("res://Item/Item.tscn").instance()
+		item = load("res://Item/Item.tscn").instance()
 		add_child(item)
 		item.set_item(item_name, item_stat, item_quantity)
 	else:

@@ -1,34 +1,16 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Characters/BattleCharacters/Enemies/Enemy.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Art/Green-Slime.png" type="Texture" id=2]
 [ext_resource path="res://Core/DamageArea.gd" type="Script" id=3]
 [ext_resource path="res://Characters/BattleCharacters/Enemies/Slime.gd" type="Script" id=5]
-
-[sub_resource type="GDScript" id=12]
-script/source = "extends StateMachine
-
-
-func _state_logic(_delta, _state): #Trien khai logic cho trang thai hien tai
-	pass
-
-func _get_transition(_delta): #Ham xac dinh trang thai moi
-	return null
-
-func _enter_state(_new_state, _old_state): #Ham xu ly cac logic khi chuan bi chuyen sang trang thai moi
-	pass
-
-func _exit_state(_old_state, _new_state): #Ham xu ly cac logic khi ra khoi trang thai hien tai
-	pass
-"
 
 [sub_resource type="CapsuleShape2D" id=60]
 radius = 3.0
 height = 6.0
 
 [sub_resource type="CapsuleShape2D" id=9]
-radius = 5.99999
-height = 6.0
+radius = 6.99999
+height = 6.00003
 
 [sub_resource type="CapsuleShape2D" id=10]
 radius = 5.0
@@ -485,12 +467,8 @@ script = ExtResource( 5 )
 move_speed_unit = 1.0
 max_active_area = 20
 
-[node name="StateMachine" parent="." index="0"]
-script = SubResource( 12 )
-
 [node name="Sprite" parent="Body" index="0"]
 position = Vector2( 0, -9 )
-texture = ExtResource( 2 )
 hframes = 5
 vframes = 13
 
@@ -508,7 +486,7 @@ wait_time = 2.0
 autostart = true
 
 [node name="AttackTime" parent="Timers" index="3"]
-wait_time = 0.2
+wait_time = 0.25
 one_shot = true
 
 [node name="DamageArea" type="Area2D" parent="." index="4"]

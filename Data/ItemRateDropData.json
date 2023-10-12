@@ -1,0 +1,17 @@
+{
+    "GreenSlime": {
+        "Iron Sword": {
+            "MinRate": 0,
+            "MaxRate": 15
+        },
+        "Stone Sword": {
+            "MinRate": 16,
+            "MaxRate": 50
+        },
+        "Apple": {
+            "MinRate": 51,
+            "MaxRate": 100,
+            "Quantity": 5
+        }
+    }
+}

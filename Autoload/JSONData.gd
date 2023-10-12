@@ -1,14 +1,17 @@
 extends Node
 
-const item_data_path = "res://Data/ItemData.json"
-const player_inventory_data_path = "res://Data/PlayerInventoryData.json"
+const ITEM_DATA_PATH = "res://Data/ItemData.json"
+const PLAYER_INVENTORY_DATA_PATH = "res://Data/PlayerInventoryData.json"
+const ITEM_RATE_DROP_DATA_PATH = "res://Data/ItemRateDropData.json"
 
 var item_data: Dictionary
 var player_inventory_data: Dictionary
+var item_rate_drop_data: Dictionary
 
 func _ready():
-	item_data = load_data(item_data_path)
-	player_inventory_data = load_data(player_inventory_data_path)
+	item_data = load_data(ITEM_DATA_PATH)
+	player_inventory_data = load_data(PLAYER_INVENTORY_DATA_PATH)
+	item_rate_drop_data = load_data(ITEM_RATE_DROP_DATA_PATH)
 
 func load_data(file_path):
 	var json_data
@@ -23,7 +26,7 @@ func load_data(file_path):
 
 func update_inventory(location, new_data):
 	var file = File.new()
-	file.open(player_inventory_data_path, File.WRITE)
+	file.open(PLAYER_INVENTORY_DATA_PATH, File.WRITE)
 	player_inventory_data[location] = new_data
 	file.store_line(JSON.print(player_inventory_data))
 	file.close()
