@@ -399,10 +399,12 @@ hframes = 6
 vframes = 16
 
 [node name="CollisionShape2D" parent="." index="2"]
+visible = false
 position = Vector2( 0, 0.75 )
 shape = SubResource( 1 )
 
 [node name="Hitbox" parent="." index="4"]
+visible = false
 collision_mask = 1
 immunity_duration = 0.25
 

@@ -30,9 +30,9 @@ func drop_item(body_name, body: KinematicBody2D):
 						var random_stat = int(rand_range(0, 101))
 						var stat = list_random_stat[stat_name]
 						if random_stat <= stat["Rate"]:
-							var value = int(rand_range(stat["Stat"]["Min"], stat["Stat"]["Max"]))
-							print(stat_name + " " + str(value))
-							item_stat[stat_name] = value
+							var value = int(rand_range(-stat["Max"], stat["Max"]))
+							if value:
+								item_stat[stat_name] = value
 				Items.CONSUMABLE:
 					item_quantity = item_drop["Quantity"]
 			item.set_item(item_name, item_stat, item_quantity)

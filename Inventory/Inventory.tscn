@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Art/Inventory/Inventory.png" type="Texture" id=1]
 [ext_resource path="res://Art/Inventory/equip_slot.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Art/Inventory/character_index.png" type="Texture" id=11]
 [ext_resource path="res://Font/Comfortaa-Bold.ttf" type="DynamicFontData" id=12]
 [ext_resource path="res://Font/m5x7.ttf" type="DynamicFontData" id=13]
+[ext_resource path="res://Inventory/CharacterIndex.gd" type="Script" id=14]
 
 [sub_resource type="StyleBoxTexture" id=1]
 
@@ -41,7 +42,7 @@ outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 12 )
 
 [sub_resource type="DynamicFont" id=13]
-size = 9
+size = 10
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 13 )
@@ -584,6 +585,7 @@ margin_top = 0.466715
 margin_right = -88.1156
 margin_bottom = 134.467
 texture = ExtResource( 11 )
+script = ExtResource( 14 )
 
 [node name="Label" type="Label" parent="CharacterIndex"]
 margin_left = 8.0
@@ -605,49 +607,49 @@ text = "ATK:"
 
 [node name="DefLabel" type="Label" parent="CharacterIndex"]
 margin_left = 11.0
-margin_top = 30.0
+margin_top = 29.6837
 margin_right = 51.0
-margin_bottom = 39.0
+margin_bottom = 39.6837
 custom_fonts/font = SubResource( 13 )
 text = "DEF:"
 
 [node name="CritRateLabel" type="Label" parent="CharacterIndex"]
 margin_left = 11.0
 margin_top = 38.0
-margin_right = 51.0
-margin_bottom = 47.0
+margin_right = 57.0
+margin_bottom = 48.0
 custom_fonts/font = SubResource( 13 )
 text = "CRIT RATE:"
 
 [node name="CritDamageLabel" type="Label" parent="CharacterIndex"]
 margin_left = 11.0
 margin_top = 46.0
-margin_right = 51.0
-margin_bottom = 55.0
+margin_right = 68.0
+margin_bottom = 56.0
 custom_fonts/font = SubResource( 13 )
 text = "CRIT DAMAGE:"
 
-[node name="AttackCooldownLabel" type="Label" parent="CharacterIndex"]
+[node name="AttackSpeedLabel" type="Label" parent="CharacterIndex"]
 margin_left = 11.0
 margin_top = 54.0
-margin_right = 51.0
-margin_bottom = 63.0
+margin_right = 109.0
+margin_bottom = 64.0
 custom_fonts/font = SubResource( 13 )
 text = "ATTACK COOLDOWN: 0.5s"
 
 [node name="MaxHealthLabel" type="Label" parent="CharacterIndex"]
 margin_left = 11.0
 margin_top = 62.0
-margin_right = 51.0
-margin_bottom = 71.0
+margin_right = 63.0
+margin_bottom = 72.0
 custom_fonts/font = SubResource( 13 )
 text = "MAX HEALTH:"
 
 [node name="MaxEnergyLabel" type="Label" parent="CharacterIndex"]
 margin_left = 11.0
 margin_top = 70.0
-margin_right = 51.0
-margin_bottom = 79.0
+margin_right = 63.0
+margin_bottom = 80.0
 custom_fonts/font = SubResource( 13 )
 text = "MAX ENERGY:"
 
@@ -655,14 +657,14 @@ text = "MAX ENERGY:"
 margin_left = 11.0
 margin_top = 78.0
 margin_right = 51.0
-margin_bottom = 87.0
+margin_bottom = 88.0
 custom_fonts/font = SubResource( 13 )
 text = "SPEED:"
 
 [node name="KnockbackLabel" type="Label" parent="CharacterIndex"]
 margin_left = 10.5018
 margin_top = 85.5703
-margin_right = 50.5018
-margin_bottom = 94.5703
+margin_right = 57.5018
+margin_bottom = 95.5703
 custom_fonts/font = SubResource( 13 )
 text = "KNOCKBACK:"

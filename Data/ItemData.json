@@ -8,17 +8,11 @@
         "RandomStat": {
             "CritDamage": {
                 "Rate": 30,
-                "Stat": {
-                    "Min": 3,
-                    "Max": 7
-                }
+                "Max": 7
             },
             "CritRate": {
                 "Rate": 30,
-                "Stat": {
-                    "Min": 1,
-                    "Max": 4
-                }
+                "Max": 4
             }
         },
         "StackSize": 1,
@@ -33,17 +27,11 @@
         "RandomStat": {
             "CritDamage": {
                 "Rate": 30,
-                "Stat": {
-                    "Min": 5,
-                    "Max": 10
-                }
+                "Max": 10
             },
             "CritRate": {
                 "Rate": 30,
-                "Stat": {
-                    "Min": 2,
-                    "Max": 5
-                }
+                "Max": 5
             }
         },
         "StackSize": 1,

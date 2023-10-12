@@ -4,9 +4,11 @@ const ITEM_DATA_PATH = "res://Data/ItemData.json"
 const PLAYER_INVENTORY_DATA_PATH = "res://Data/PlayerInventoryData.json"
 const ITEM_RATE_DROP_DATA_PATH = "res://Data/ItemRateDropData.json"
 
+
 var item_data: Dictionary
 var player_inventory_data: Dictionary
 var item_rate_drop_data: Dictionary
+
 
 func _ready():
 	item_data = load_data(ITEM_DATA_PATH)
